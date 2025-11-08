@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車 - 優質傢俱</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <!-- Include same navigation as index.html -->
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">首頁</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>購物車</span>
+            </div>
+
+            <div class="cart-page">
+                <h1 class="page-title">購物車</h1>
+
+                <div class="cart-content">
+                    <!-- Cart Items -->
+                    <div class="cart-items">
+                        <div class="cart-header">
+                            <div class="header-product">產品</div>
+                            <div class="header-price">單價</div>
+                            <div class="header-quantity">數量</div>
+                            <div class="header-total">小計</div>
+                            <div class="header-actions">操作</div>
+                        </div>
+
+                        <div class="cart-item">
+                            <div class="item-product">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1758&q=80" alt="現代簡約沙發">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">現代簡約布藝沙發</h3>
+                                    <div class="product-variant">
+                                        <span>顏色: 灰色</span>
+                                        <span>尺寸: 三人座</span>
+                                    </div>
+                                    <div class="product-sku">編號: SF-2024-M01</div>
+                                </div>
+                            </div>
+                            <div class="item-price">
+                                <span class="current-price">$12,800</span>
+                                <span class="original-price">$15,800</span>
+                            </div>
+                            <div class="item-quantity">
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn" onclick="decreaseCartQuantity(this)">-</button>
+                                    <input type="number" value="1" min="1" max="10">
+                                    <button class="quantity-btn" onclick="increaseCartQuantity(this)">+</button>
+                                </div>
+                            </div>
+                            <div class="item-total">
+                                $12,800
+                            </div>
+                            <div class="item-actions">
+                                <button class="remove-btn" onclick="removeCartItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="wishlist-btn" onclick="moveToWishlist(this)">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="cart-item">
+                            <div class="item-product">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="實木餐桌">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">北歐實木餐桌</h3>
+                                    <div class="product-variant">
+                                        <span>材質: 橡木</span>
+                                        <span>尺寸: 140cm</span>
+                                    </div>
+                                    <div class="product-sku">編號: TB-2024-O01</div>
+                                </div>
+                            </div>
+                            <div class="item-price">
+                                <span class="current-price">$8,500</span>
+                            </div>
+                            <div class="item-quantity">
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn" onclick="decreaseCartQuantity(this)">-</button>
+                                    <input type="number" value="1" min="1" max="10">
+                                    <button class="quantity-btn" onclick="increaseCartQuantity(this)">+</button>
+                                </div>
+                            </div>
+                            <div class="item-total">
+                                $8,500
+                            </div>
+                            <div class="item-actions">
+                                <button class="remove-btn" onclick="removeCartItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="wishlist-btn" onclick="moveToWishlist(this)">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Empty Cart Message -->
+                        <!-- <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>購物車是空的</h3>
+                            <p>快去選購您喜歡的商品吧！</p>
+                            <a href="products.html" class="btn btn-primary">開始購物</a>
+                        </div> -->
+                    </div>
+
+                    <!-- Cart Summary -->
+                    <div class="cart-summary">
+                        <div class="summary-card">
+                            <h3>訂單摘要</h3>
+                            
+                            <div class="summary-row">
+                                <span>小計</span>
+                                <span>$21,300</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>運費</span>
+                                <span class="free-shipping">免費</span>
+                            </div>
+                            <div class="summary-row discount">
+                                <span>折扣</span>
+                                <span>-$3,000</span>
+                            </div>
+                            
+                            <div class="summary-divider"></div>
+                            
+                            <div class="summary-row total">
+                                <span>總計</span>
+                                <span>$18,300</span>
+                            </div>
+
+                            <div class="shipping-notice">
+                                <i class="fas fa-info-circle"></i>
+                                再消費 $1,700 即可享受免費運送
+                            </div>
+
+                            <button class="btn btn-primary checkout-btn" onclick="proceedToCheckout()">
+                                前往結帳
+                            </button>
+
+                            <div class="payment-methods">
+                                <p>我們接受以下付款方式:</p>
+                                <div class="payment-icons">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-amex"></i>
+                                    <i class="fab fa-cc-jcb"></i>
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="promo-code">
+                            <h4>優惠代碼</h4>
+                            <div class="promo-input">
+                                <input type="text" placeholder="輸入優惠代碼" id="promoCode">
+                                <button class="btn btn-outline" onclick="applyPromoCode()">套用</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recently Viewed -->
+                <div class="recently-viewed">
+                    <h3>最近瀏覽的商品</h3>
+                    <div class="products-grid mini">
+                        <!-- Recently viewed products -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Include same footer as index.html -->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

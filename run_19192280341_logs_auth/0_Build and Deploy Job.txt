@@ -1,0 +1,281 @@
+﻿2025-11-08T11:15:20.4887691Z Current runner version: '2.329.0'
+2025-11-08T11:15:20.4912057Z ##[group]Runner Image Provisioner
+2025-11-08T11:15:20.4912971Z Hosted Compute Agent
+2025-11-08T11:15:20.4913508Z Version: 20251016.436
+2025-11-08T11:15:20.4914109Z Commit: 8ab8ac8bfd662a3739dab9fe09456aba92132568
+2025-11-08T11:15:20.4914905Z Build Date: 2025-10-15T20:44:12Z
+2025-11-08T11:15:20.4915669Z ##[endgroup]
+2025-11-08T11:15:20.4916215Z ##[group]Operating System
+2025-11-08T11:15:20.4916864Z Ubuntu
+2025-11-08T11:15:20.4917386Z 24.04.3
+2025-11-08T11:15:20.4917831Z LTS
+2025-11-08T11:15:20.4918348Z ##[endgroup]
+2025-11-08T11:15:20.4918850Z ##[group]Runner Image
+2025-11-08T11:15:20.4919374Z Image: ubuntu-24.04
+2025-11-08T11:15:20.4919968Z Version: 20251102.99.1
+2025-11-08T11:15:20.4920971Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251102.99/images/ubuntu/Ubuntu2404-Readme.md
+2025-11-08T11:15:20.4922574Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251102.99
+2025-11-08T11:15:20.4923531Z ##[endgroup]
+2025-11-08T11:15:20.4924660Z ##[group]GITHUB_TOKEN Permissions
+2025-11-08T11:15:20.4926849Z Contents: read
+2025-11-08T11:15:20.4927374Z Metadata: read
+2025-11-08T11:15:20.4928012Z Packages: read
+2025-11-08T11:15:20.4928492Z ##[endgroup]
+2025-11-08T11:15:20.4930608Z Secret source: Actions
+2025-11-08T11:15:20.4931681Z Prepare workflow directory
+2025-11-08T11:15:20.5315149Z Prepare all required actions
+2025-11-08T11:15:20.5373687Z Getting action download info
+2025-11-08T11:15:20.7859909Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+2025-11-08T11:15:20.8769272Z Download action repository 'Azure/static-web-apps-deploy@v1' (SHA:4d27395796ac319302594769cfe812bd207490b1)
+2025-11-08T11:15:21.4702250Z Complete job name: Build and Deploy Job
+2025-11-08T11:15:21.5236795Z ##[group]Build container for action use: '/home/runner/work/_actions/Azure/static-web-apps-deploy/v1/Dockerfile'.
+2025-11-08T11:15:21.5288992Z ##[command]/usr/bin/docker build -t 488fed:a25b0ea52e664ce0a34a14d1665f254f -f "/home/runner/work/_actions/Azure/static-web-apps-deploy/v1/Dockerfile" "/home/runner/work/_actions/Azure/static-web-apps-deploy/v1"
+2025-11-08T11:15:25.5067256Z #0 building with "default" instance using docker driver
+2025-11-08T11:15:25.5067840Z 
+2025-11-08T11:15:25.5068046Z #1 [internal] load build definition from Dockerfile
+2025-11-08T11:15:25.5068580Z #1 transferring dockerfile: 160B done
+2025-11-08T11:15:25.5068915Z #1 DONE 0.0s
+2025-11-08T11:15:25.5069049Z 
+2025-11-08T11:15:25.5069411Z #2 [internal] load metadata for mcr.microsoft.com/appsvc/staticappsclient:stable
+2025-11-08T11:15:25.5138302Z #2 DONE 0.2s
+2025-11-08T11:15:25.6365673Z 
+2025-11-08T11:15:25.6366662Z #3 [internal] load .dockerignore
+2025-11-08T11:15:25.6367805Z #3 transferring context: 2B done
+2025-11-08T11:15:25.6368795Z #3 DONE 0.0s
+2025-11-08T11:15:25.6371091Z 
+2025-11-08T11:15:25.6371349Z #4 [internal] load build context
+2025-11-08T11:15:25.6371886Z #4 transferring context: 107B done
+2025-11-08T11:15:25.6372429Z #4 DONE 0.0s
+2025-11-08T11:15:25.6372638Z 
+2025-11-08T11:15:25.6373415Z #5 [1/2] FROM mcr.microsoft.com/appsvc/staticappsclient:stable@sha256:3178a283e885dc45a0c7b4c6e9f728f0331ae7fb93de75db4181fa38651170f2
+2025-11-08T11:15:25.6375129Z #5 resolve mcr.microsoft.com/appsvc/staticappsclient:stable@sha256:3178a283e885dc45a0c7b4c6e9f728f0331ae7fb93de75db4181fa38651170f2 done
+2025-11-08T11:15:25.6376799Z #5 sha256:1df8e0748f30e89b0c0477edfc706fc39242e1d6008433c0494113de267e7ca8 15.34kB / 15.34kB done
+2025-11-08T11:15:25.6378051Z #5 sha256:3178a283e885dc45a0c7b4c6e9f728f0331ae7fb93de75db4181fa38651170f2 2.88kB / 2.88kB done
+2025-11-08T11:15:25.6379286Z #5 sha256:5d6e107a26c2ffb6e234f04132358dea70a691a64c1152f984d2f2ba0e218c58 17.83MB / 53.74MB 0.1s
+2025-11-08T11:15:25.6380643Z #5 sha256:2377065f3b700cf1b5e391d26c572c8b91892dd44acd75deebdab5e403b23175 12.58MB / 15.56MB 0.1s
+2025-11-08T11:15:25.6381846Z #5 sha256:5ee26b7a209f9a26720207792b237af3e19c0efeed8695e1e630fcd0feef9230 9.44MB / 54.75MB 0.1s
+2025-11-08T11:15:25.7396531Z #5 sha256:5d6e107a26c2ffb6e234f04132358dea70a691a64c1152f984d2f2ba0e218c58 44.04MB / 53.74MB 0.2s
+2025-11-08T11:15:25.7397991Z #5 sha256:2377065f3b700cf1b5e391d26c572c8b91892dd44acd75deebdab5e403b23175 15.56MB / 15.56MB 0.1s done
+2025-11-08T11:15:25.7399319Z #5 sha256:5ee26b7a209f9a26720207792b237af3e19c0efeed8695e1e630fcd0feef9230 37.75MB / 54.75MB 0.2s
+2025-11-08T11:15:25.7400179Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 15.73MB / 197.07MB 0.2s
+2025-11-08T11:15:25.8859999Z #5 sha256:5d6e107a26c2ffb6e234f04132358dea70a691a64c1152f984d2f2ba0e218c58 50.33MB / 53.74MB 0.3s
+2025-11-08T11:15:25.8861408Z #5 sha256:5ee26b7a209f9a26720207792b237af3e19c0efeed8695e1e630fcd0feef9230 54.75MB / 54.75MB 0.3s done
+2025-11-08T11:15:25.8864628Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 40.89MB / 197.07MB 0.3s
+2025-11-08T11:15:25.8866936Z #5 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0B / 32B 0.3s
+2025-11-08T11:15:25.8868112Z #5 extracting sha256:5d6e107a26c2ffb6e234f04132358dea70a691a64c1152f984d2f2ba0e218c58
+2025-11-08T11:15:26.0344225Z #5 sha256:5d6e107a26c2ffb6e234f04132358dea70a691a64c1152f984d2f2ba0e218c58 53.74MB / 53.74MB 0.3s done
+2025-11-08T11:15:26.0345830Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 94.18MB / 197.07MB 0.5s
+2025-11-08T11:15:26.0351445Z #5 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 0.3s done
+2025-11-08T11:15:26.0356173Z #5 sha256:ec0af1da0a0576de654092a28624c0565c6d854216944f18159460338af43293 25.17MB / 72.99MB 0.5s
+2025-11-08T11:15:26.0357405Z #5 sha256:c279a6399750ee20e802fb2c47da034ccee5eb4f3b89087f32618f10e8af074a 1.56MB / 1.56MB 0.4s done
+2025-11-08T11:15:26.0361201Z #5 sha256:aede74d79976f9d1be608a1286cdb2ca61aad25185440263691db6a0880adadd 24.46MB / 24.46MB 0.4s done
+2025-11-08T11:15:26.0362471Z #5 sha256:eec8099d3f58ba87e25216a07db18b5a0de40b6921ee61ea8ab9b4c29b53a12f 1.16MB / 1.16MB 0.5s done
+2025-11-08T11:15:26.0365927Z #5 sha256:351447e6e3829fac25a761f87d07dc5bfc289f38908901d05fa53aaab54dbdcd 115.52kB / 115.52kB 0.5s done
+2025-11-08T11:15:26.1357440Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 120.20MB / 197.07MB 0.6s
+2025-11-08T11:15:26.1358740Z #5 sha256:ec0af1da0a0576de654092a28624c0565c6d854216944f18159460338af43293 51.38MB / 72.99MB 0.6s
+2025-11-08T11:15:26.1359873Z #5 sha256:36312d7930e0666f8cfc7940823ac101235e873b7cbb8b20d9481fd404095767 9.44MB / 35.20MB 0.6s
+2025-11-08T11:15:26.1362316Z #5 sha256:cddc70a1cccef26d55fcf9242759c41404c305acea0b4c3a30961c99846a0a55 637.94kB / 637.94kB 0.5s done
+2025-11-08T11:15:26.2602263Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 147.26MB / 197.07MB 0.7s
+2025-11-08T11:15:26.2604317Z #5 sha256:ec0af1da0a0576de654092a28624c0565c6d854216944f18159460338af43293 72.99MB / 72.99MB 0.7s
+2025-11-08T11:15:26.2605684Z #5 sha256:36312d7930e0666f8cfc7940823ac101235e873b7cbb8b20d9481fd404095767 35.20MB / 35.20MB 0.7s
+2025-11-08T11:15:26.3603529Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 175.11MB / 197.07MB 0.8s
+2025-11-08T11:15:26.3604884Z #5 sha256:ec0af1da0a0576de654092a28624c0565c6d854216944f18159460338af43293 72.99MB / 72.99MB 0.7s done
+2025-11-08T11:15:26.3606226Z #5 sha256:36312d7930e0666f8cfc7940823ac101235e873b7cbb8b20d9481fd404095767 35.20MB / 35.20MB 0.7s done
+2025-11-08T11:15:26.3607400Z #5 sha256:4a1fde1690fe113870084a3224c66554fc9cbd2310abb9593b0244ec21f4b76d 168B / 168B 0.7s done
+2025-11-08T11:15:26.3608511Z #5 sha256:8023cb51985fccd3faa4be6340cdc75b72240277850569aa974767dda5176159 168B / 168B 0.7s done
+2025-11-08T11:15:26.3609674Z #5 sha256:4836a863d60df9ca0cedad0eb5e729c4a7f755449fbfbd6d4ea6443e64c990e0 7.34MB / 118.65MB 0.8s
+2025-11-08T11:15:26.5355770Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 197.07MB / 197.07MB 1.0s
+2025-11-08T11:15:26.5356976Z #5 sha256:4836a863d60df9ca0cedad0eb5e729c4a7f755449fbfbd6d4ea6443e64c990e0 62.91MB / 118.65MB 1.0s
+2025-11-08T11:15:26.7342590Z #5 sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 197.07MB / 197.07MB 1.2s done
+2025-11-08T11:15:27.0694457Z #5 sha256:4836a863d60df9ca0cedad0eb5e729c4a7f755449fbfbd6d4ea6443e64c990e0 117.44MB / 118.65MB 1.2s
+2025-11-08T11:15:27.0695927Z #5 sha256:4836a863d60df9ca0cedad0eb5e729c4a7f755449fbfbd6d4ea6443e64c990e0 118.65MB / 118.65MB 1.4s done
+2025-11-08T11:15:28.3407143Z #5 extracting sha256:5d6e107a26c2ffb6e234f04132358dea70a691a64c1152f984d2f2ba0e218c58 2.5s done
+2025-11-08T11:15:28.4661641Z #5 extracting sha256:2377065f3b700cf1b5e391d26c572c8b91892dd44acd75deebdab5e403b23175 0.1s
+2025-11-08T11:15:28.8804793Z #5 extracting sha256:2377065f3b700cf1b5e391d26c572c8b91892dd44acd75deebdab5e403b23175 0.4s done
+2025-11-08T11:15:28.9981668Z #5 extracting sha256:5ee26b7a209f9a26720207792b237af3e19c0efeed8695e1e630fcd0feef9230
+2025-11-08T11:15:31.0160591Z #5 extracting sha256:5ee26b7a209f9a26720207792b237af3e19c0efeed8695e1e630fcd0feef9230 1.9s done
+2025-11-08T11:15:31.1438784Z #5 extracting sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88
+2025-11-08T11:15:35.7950219Z #5 extracting sha256:41c7cd6fb37363fd1ec16dad3463ecc5820eda12c418a82b4849604252d29b88 4.7s done
+2025-11-08T11:15:36.9280107Z #5 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025-11-08T11:15:37.0623483Z #5 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+2025-11-08T11:15:37.0624823Z #5 extracting sha256:aede74d79976f9d1be608a1286cdb2ca61aad25185440263691db6a0880adadd 0.1s
+2025-11-08T11:15:37.7841744Z #5 extracting sha256:aede74d79976f9d1be608a1286cdb2ca61aad25185440263691db6a0880adadd 0.7s done
+2025-11-08T11:15:37.7843918Z #5 extracting sha256:c279a6399750ee20e802fb2c47da034ccee5eb4f3b89087f32618f10e8af074a 0.1s
+2025-11-08T11:15:37.9093891Z #5 extracting sha256:c279a6399750ee20e802fb2c47da034ccee5eb4f3b89087f32618f10e8af074a 0.1s done
+2025-11-08T11:15:37.9095107Z #5 extracting sha256:ec0af1da0a0576de654092a28624c0565c6d854216944f18159460338af43293 0.1s
+2025-11-08T11:15:38.8759192Z #5 extracting sha256:ec0af1da0a0576de654092a28624c0565c6d854216944f18159460338af43293 0.9s done
+2025-11-08T11:15:38.9265977Z #5 extracting sha256:351447e6e3829fac25a761f87d07dc5bfc289f38908901d05fa53aaab54dbdcd
+2025-11-08T11:15:39.0422920Z #5 extracting sha256:351447e6e3829fac25a761f87d07dc5bfc289f38908901d05fa53aaab54dbdcd done
+2025-11-08T11:15:39.0424071Z #5 extracting sha256:eec8099d3f58ba87e25216a07db18b5a0de40b6921ee61ea8ab9b4c29b53a12f 0.0s done
+2025-11-08T11:15:39.0425172Z #5 extracting sha256:cddc70a1cccef26d55fcf9242759c41404c305acea0b4c3a30961c99846a0a55 0.0s done
+2025-11-08T11:15:39.1632455Z #5 extracting sha256:36312d7930e0666f8cfc7940823ac101235e873b7cbb8b20d9481fd404095767 0.1s
+2025-11-08T11:15:39.4895597Z #5 extracting sha256:36312d7930e0666f8cfc7940823ac101235e873b7cbb8b20d9481fd404095767 0.4s done
+2025-11-08T11:15:39.4897657Z #5 extracting sha256:4a1fde1690fe113870084a3224c66554fc9cbd2310abb9593b0244ec21f4b76d
+2025-11-08T11:15:39.6379136Z #5 extracting sha256:4a1fde1690fe113870084a3224c66554fc9cbd2310abb9593b0244ec21f4b76d done
+2025-11-08T11:15:39.6380390Z #5 extracting sha256:8023cb51985fccd3faa4be6340cdc75b72240277850569aa974767dda5176159 done
+2025-11-08T11:15:39.6381433Z #5 extracting sha256:4836a863d60df9ca0cedad0eb5e729c4a7f755449fbfbd6d4ea6443e64c990e0 0.1s
+2025-11-08T11:15:42.8544840Z #5 extracting sha256:4836a863d60df9ca0cedad0eb5e729c4a7f755449fbfbd6d4ea6443e64c990e0 3.2s done
+2025-11-08T11:15:43.3126781Z #5 DONE 17.8s
+2025-11-08T11:15:43.4749775Z 
+2025-11-08T11:15:43.4750207Z #6 [2/2] COPY entrypoint.sh /entrypoint.sh
+2025-11-08T11:15:43.4750753Z #6 DONE 0.0s
+2025-11-08T11:15:43.4750948Z 
+2025-11-08T11:15:43.4751099Z #7 exporting to image
+2025-11-08T11:15:43.4751466Z #7 exporting layers
+2025-11-08T11:15:44.5156223Z #7 exporting layers 1.2s done
+2025-11-08T11:15:44.5379593Z #7 writing image sha256:f3963d50f62b4e881dbf9fd133c8d90a6b953b08a38e834492530109a2b6e672 done
+2025-11-08T11:15:44.5380891Z #7 naming to docker.io/library/488fed:a25b0ea52e664ce0a34a14d1665f254f done
+2025-11-08T11:15:44.5381831Z #7 DONE 1.2s
+2025-11-08T11:15:44.5428786Z ##[endgroup]
+2025-11-08T11:15:44.5690302Z ##[group]Run actions/checkout@v3
+2025-11-08T11:15:44.5690946Z with:
+2025-11-08T11:15:44.5691128Z   submodules: true
+2025-11-08T11:15:44.5691320Z   lfs: false
+2025-11-08T11:15:44.5691545Z   repository: angusyty75/furniture-store-frontend
+2025-11-08T11:15:44.5691979Z   token: ***
+2025-11-08T11:15:44.5692157Z   ssh-strict: true
+2025-11-08T11:15:44.5692353Z   persist-credentials: true
+2025-11-08T11:15:44.5692564Z   clean: true
+2025-11-08T11:15:44.5692750Z   sparse-checkout-cone-mode: true
+2025-11-08T11:15:44.5692975Z   fetch-depth: 1
+2025-11-08T11:15:44.5693151Z   fetch-tags: false
+2025-11-08T11:15:44.5693336Z   set-safe-directory: true
+2025-11-08T11:15:44.5693744Z ##[endgroup]
+2025-11-08T11:15:44.6531946Z Syncing repository: angusyty75/furniture-store-frontend
+2025-11-08T11:15:44.6533258Z ##[group]Getting Git version info
+2025-11-08T11:15:44.6533768Z Working directory is '/home/runner/work/furniture-store-frontend/furniture-store-frontend'
+2025-11-08T11:15:44.6534500Z [command]/usr/bin/git version
+2025-11-08T11:15:44.6539039Z git version 2.51.2
+2025-11-08T11:15:44.6566130Z ##[endgroup]
+2025-11-08T11:15:44.6582976Z Temporarily overriding HOME='/home/runner/work/_temp/7fe6324b-c38d-432f-a59b-7de02064bb1e' before making global git config changes
+2025-11-08T11:15:44.6584355Z Adding repository directory to the temporary git global config as a safe directory
+2025-11-08T11:15:44.6588186Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/furniture-store-frontend/furniture-store-frontend
+2025-11-08T11:15:44.6672453Z Deleting the contents of '/home/runner/work/furniture-store-frontend/furniture-store-frontend'
+2025-11-08T11:15:44.6676058Z ##[group]Initializing the repository
+2025-11-08T11:15:44.6679223Z [command]/usr/bin/git init /home/runner/work/furniture-store-frontend/furniture-store-frontend
+2025-11-08T11:15:44.7238360Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-11-08T11:15:44.7239366Z hint: is subject to change. To configure the initial branch name to use in all
+2025-11-08T11:15:44.7240083Z hint: of your new repositories, which will suppress this warning, call:
+2025-11-08T11:15:44.7240598Z hint:
+2025-11-08T11:15:44.7241035Z hint: 	git config --global init.defaultBranch <name>
+2025-11-08T11:15:44.7241455Z hint:
+2025-11-08T11:15:44.7241850Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-11-08T11:15:44.7242500Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-11-08T11:15:44.7243008Z hint:
+2025-11-08T11:15:44.7243278Z hint: 	git branch -m <name>
+2025-11-08T11:15:44.7243590Z hint:
+2025-11-08T11:15:44.7244014Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-11-08T11:15:44.7284781Z Initialized empty Git repository in /home/runner/work/furniture-store-frontend/furniture-store-frontend/.git/
+2025-11-08T11:15:44.7296934Z [command]/usr/bin/git remote add origin https://github.com/angusyty75/furniture-store-frontend
+2025-11-08T11:15:44.7370685Z ##[endgroup]
+2025-11-08T11:15:44.7371515Z ##[group]Disabling automatic garbage collection
+2025-11-08T11:15:44.7374731Z [command]/usr/bin/git config --local gc.auto 0
+2025-11-08T11:15:44.7402643Z ##[endgroup]
+2025-11-08T11:15:44.7402969Z ##[group]Setting up auth
+2025-11-08T11:15:44.7408296Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-11-08T11:15:44.7434757Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-11-08T11:15:44.8835785Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-11-08T11:15:44.8866561Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-11-08T11:15:44.9105776Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-11-08T11:15:44.9143095Z ##[endgroup]
+2025-11-08T11:15:44.9143698Z ##[group]Fetching the repository
+2025-11-08T11:15:44.9154115Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +65a1332dac02c51489fb162f71d3cfa8b94b9eb8:refs/remotes/origin/main
+2025-11-08T11:15:45.1123283Z remote: Enumerating objects: 5, done.        
+2025-11-08T11:15:45.1123971Z remote: Counting objects:  20% (1/5)        
+2025-11-08T11:15:45.1124557Z remote: Counting objects:  40% (2/5)        
+2025-11-08T11:15:45.1125131Z remote: Counting objects:  60% (3/5)        
+2025-11-08T11:15:45.1126089Z remote: Counting objects:  80% (4/5)        
+2025-11-08T11:15:45.1126675Z remote: Counting objects: 100% (5/5)        
+2025-11-08T11:15:45.1127283Z remote: Counting objects: 100% (5/5), done.        
+2025-11-08T11:15:45.1127941Z remote: Compressing objects:  33% (1/3)        
+2025-11-08T11:15:45.1128449Z remote: Compressing objects:  66% (2/3)        
+2025-11-08T11:15:45.1128976Z remote: Compressing objects: 100% (3/3)        
+2025-11-08T11:15:45.1129526Z remote: Compressing objects: 100% (3/3), done.        
+2025-11-08T11:15:45.1130161Z remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-11-08T11:15:45.1501202Z From https://github.com/angusyty75/furniture-store-frontend
+2025-11-08T11:15:45.1501969Z  * [new ref]         65a1332dac02c51489fb162f71d3cfa8b94b9eb8 -> origin/main
+2025-11-08T11:15:45.1593560Z ##[endgroup]
+2025-11-08T11:15:45.1594251Z ##[group]Determining the checkout info
+2025-11-08T11:15:45.1595793Z ##[endgroup]
+2025-11-08T11:15:45.1596445Z ##[group]Checking out the ref
+2025-11-08T11:15:45.1600625Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-11-08T11:15:45.1693433Z Switched to a new branch 'main'
+2025-11-08T11:15:45.1696261Z branch 'main' set up to track 'origin/main'.
+2025-11-08T11:15:45.1701797Z ##[endgroup]
+2025-11-08T11:15:45.1702177Z ##[group]Setting up auth for fetching submodules
+2025-11-08T11:15:45.1706079Z [command]/usr/bin/git config --global http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-11-08T11:15:45.1740777Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+2025-11-08T11:15:45.1768780Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2025-11-08T11:15:45.1795234Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-217858616@github.com:
+2025-11-08T11:15:45.1819514Z ##[endgroup]
+2025-11-08T11:15:45.1819911Z ##[group]Fetching submodules
+2025-11-08T11:15:45.1825261Z [command]/usr/bin/git submodule sync
+2025-11-08T11:15:45.2043312Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+2025-11-08T11:15:45.2256862Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+2025-11-08T11:15:45.2464717Z ##[endgroup]
+2025-11-08T11:15:45.2465143Z ##[group]Persisting credentials for submodules
+2025-11-08T11:15:45.2472064Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+2025-11-08T11:15:45.2687271Z [command]/usr/bin/git submodule foreach sh -c "git config --local 'http.https://github.com/.extraheader' 'AUTHORIZATION: basic ***' && git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-11-08T11:15:45.2904352Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+2025-11-08T11:15:45.3114528Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-217858616@github.com:'
+2025-11-08T11:15:45.3321473Z ##[endgroup]
+2025-11-08T11:15:45.3354760Z [command]/usr/bin/git log -1 --format='%H'
+2025-11-08T11:15:45.3374893Z '65a1332dac02c51489fb162f71d3cfa8b94b9eb8'
+2025-11-08T11:15:45.3551557Z ##[group]Run Azure/static-web-apps-deploy@v1
+2025-11-08T11:15:45.3551854Z with:
+2025-11-08T11:15:45.3552528Z   azure_static_web_apps_api_token: ***
+2025-11-08T11:15:45.3552893Z   repo_token: ***
+2025-11-08T11:15:45.3553091Z   action: upload
+2025-11-08T11:15:45.3553271Z   app_location: /
+2025-11-08T11:15:45.3553448Z   output_location: dist
+2025-11-08T11:15:45.3553648Z ##[endgroup]
+2025-11-08T11:15:45.3644832Z ##[command]/usr/bin/docker run --name feda25b0ea52e664ce0a34a14d1665f254f_2514e3 --label 488fed --workdir /github/workspace --rm -e "INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN" -e "INPUT_REPO_TOKEN" -e "INPUT_ACTION" -e "INPUT_APP_LOCATION" -e "INPUT_API_LOCATION" -e "INPUT_OUTPUT_LOCATION" -e "INPUT_API_BUILD_COMMAND" -e "INPUT_APP_ARTIFACT_LOCATION" -e "INPUT_APP_BUILD_COMMAND" -e "INPUT_ROUTES_LOCATION" -e "INPUT_SKIP_APP_BUILD" -e "INPUT_CONFIG_FILE_LOCATION" -e "INPUT_SKIP_API_BUILD" -e "INPUT_PRODUCTION_BRANCH" -e "INPUT_DEPLOYMENT_ENVIRONMENT" -e "INPUT_IS_STATIC_EXPORT" -e "INPUT_DATA_API_LOCATION" -e "INPUT_GITHUB_ID_TOKEN" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/furniture-store-frontend/furniture-store-frontend":"/github/workspace" 488fed:a25b0ea52e664ce0a34a14d1665f254f
+2025-11-08T11:15:46.1922530Z DeploymentId: bc5b165e-ecdc-4ca3-a0e2-cea597f28ce2
+2025-11-08T11:15:46.1923063Z 
+2025-11-08T11:15:46.3088641Z [37mTry to validate location at: '/github/workspace'.[0m
+2025-11-08T11:15:46.3100396Z [37mApp Directory Location: '/' was found.[0m
+2025-11-08T11:15:46.3101108Z [37mTry to validate location at: '/github/workspace/swa-db-connections'.[0m
+2025-11-08T11:15:46.3104136Z [37mLooking for event info[0m
+2025-11-08T11:15:48.2457150Z [37mStarting to build app with Oryx[0m
+2025-11-08T11:15:48.2458876Z [33mAzure Static Web Apps utilizes Oryx to build both static applications and Azure Functions. You can find more details on Oryx here: https://github.com/microsoft/Oryx[0m
+2025-11-08T11:15:48.2460007Z [37m---Oryx build logs---[0m
+2025-11-08T11:15:48.2460420Z [37m[0m
+2025-11-08T11:15:48.2460792Z [37m[0m
+2025-11-08T11:15:48.5636386Z [37mOperation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx[0m
+2025-11-08T11:15:48.5637327Z [37mYou can report issues at https://github.com/Microsoft/Oryx/issues[0m
+2025-11-08T11:15:48.5637843Z [37m[0m
+2025-11-08T11:15:48.5638868Z [37mOryx Version: 0.2.20250107.1+ef3fb2f9c490a4fbb1f76b5746cd4ba2ff0409f4, Commit: ef3fb2f9c490a4fbb1f76b5746cd4ba2ff0409f4, ReleaseTagName: 20250107.1[0m
+2025-11-08T11:15:48.5639844Z [37m[0m
+2025-11-08T11:15:48.5640165Z [37mBuild Operation ID: 391d24a5e20010fd[0m
+2025-11-08T11:15:48.5640934Z [37mOS Type           : bullseye[0m
+2025-11-08T11:15:48.5641333Z [37mImage Type        : githubactions[0m
+2025-11-08T11:15:48.5641903Z [37m[0m
+2025-11-08T11:15:48.5758752Z [37mDetecting platforms...[0m
+2025-11-08T11:15:48.5948159Z [37mCould not detect any platform in the source directory.[0m
+2025-11-08T11:15:48.6094483Z [31mError: Could not detect the language from repo.[0m
+2025-11-08T11:15:48.7753047Z [37m[0m
+2025-11-08T11:15:48.7753296Z [37m[0m
+2025-11-08T11:15:48.7753527Z [37m---End of Oryx build logs---[0m
+2025-11-08T11:15:48.7773057Z [33mOryx was unable to determine the build steps. Continuing assuming the assets in this folder are already built. If this is an unexpected behavior please contact support.[0m
+2025-11-08T11:15:48.7827755Z [37mFinished building app with Oryx[0m
+2025-11-08T11:15:48.7878449Z [31mFailed to find a default file in the app artifacts folder (/). Valid default files: index.html,Index.html.[0m
+2025-11-08T11:15:48.7879827Z [31mIf your application contains purely static content, please verify that the variable 'app_location' in your workflow file points to the root of your application.[0m
+2025-11-08T11:15:48.7881162Z [31mIf your application requires build steps, please validate that a default file exists in the build output directory.[0m
+2025-11-08T11:15:48.7881844Z [31m[0m
+2025-11-08T11:15:49.0129953Z [37m[0m
+2025-11-08T11:15:49.0131059Z [33mFor further information, please visit the Azure Static Web Apps documentation at https://docs.microsoft.com/en-us/azure/static-web-apps/[0m
+2025-11-08T11:15:49.0136218Z [33mIf you believe this behavior is unexpected, please raise a GitHub issue at https://github.com/azure/static-web-apps/issues/[0m
+2025-11-08T11:15:49.0137226Z [33mExiting[0m
+2025-11-08T11:15:49.1080587Z Post job cleanup.
+2025-11-08T11:15:49.1798059Z [command]/usr/bin/git version
+2025-11-08T11:15:49.1832203Z git version 2.51.2
+2025-11-08T11:15:49.1874614Z Temporarily overriding HOME='/home/runner/work/_temp/42dea5c8-5cd0-4466-8aaa-ce3380a13972' before making global git config changes
+2025-11-08T11:15:49.1876135Z Adding repository directory to the temporary git global config as a safe directory
+2025-11-08T11:15:49.1879333Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/furniture-store-frontend/furniture-store-frontend
+2025-11-08T11:15:49.1910293Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-11-08T11:15:49.1939949Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-11-08T11:15:49.2157574Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-11-08T11:15:49.2177253Z http.https://github.com/.extraheader
+2025-11-08T11:15:49.2189237Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-11-08T11:15:49.2218169Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-11-08T11:15:49.2537850Z Cleaning up orphan processes

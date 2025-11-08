@@ -1,0 +1,647 @@
+// src/pages/Cart.jsx
+import React, { useState, useEffect, useRef } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import apiClient from '../config/api';
+import { DEFAULT_TEST_CARD } from '../config/payment';
+import '../styles/payment.css';
+import { getFullImageUrl } from '../utils/imageUtils';
+import useSEO from '../hooks/useSEO';
+
+// Initialize Stripe - replace with your actual publishable key
+// You can find this in your Stripe Dashboard: https://dashboard.stripe.com/test/apikeys
+const stripePromise = loadStripe('pk_test_your_publishable_key_here'); // ← REPLACE THIS
+
+const Cart = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  
+  // SEO for Cart page
+  useSEO({
+    title: "Shopping Cart - Furniture Store",
+    description: "Review your selected furniture items and proceed to secure checkout. Premium office and home furniture with fast delivery and great customer service.",
+    keywords: "shopping cart, checkout, furniture purchase, office furniture, home furniture, secure payment"
+  });
+  
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [checkoutData, setCheckoutData] = useState({
+    shippingAddress: '',
+    billingAddress: '',
+    paymentMethod: 'credit_card',
+    phone: '',
+    email: '',
+    contactPerson: '',
+    cardholderName: '' // Only need cardholder name now
+  });
+  const [processingOrder, setProcessingOrder] = useState(false);
+  const [processingPayment, setProcessingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
+  const [userProfile, setUserProfile] = useState(null);
+  const [debugInfo, setDebugInfo] = useState({
+    lastFetch: null,
+    cartCleared: false,
+    orderCreated: false
+  });
+
+  // Stripe Elements state
+  const [stripe, setStripe] = useState(null);
+  const [elements, setElements] = useState(null);
+  const cardElementRef = useRef(null);
+
+  // Initialize Stripe
+  useEffect(() => {
+    const initializeStripe = async () => {
+      try {
+        const stripeInstance = await stripePromise;
+        const elementsInstance = stripeInstance.elements();
+        
+        setStripe(stripeInstance);
+        setElements(elementsInstance);
+      } catch (error) {
+        console.error('Error initializing Stripe:', error);
+      }
+    };
+
+    initializeStripe();
+  }, []);
+
+  // Mount Stripe Card Element when checkout form opens
+  useEffect(() => {
+    if (elements && showCheckoutForm && checkoutData.paymentMethod === 'credit_card') {
+      // Create card element
+      const cardElement = elements.create('card', {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#424770',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            '::placeholder': {
+              color: '#aab7c4',
+            },
+          },
+          invalid: {
+            color: '#9e2146',
+          },
+        },
+      });
+
+      // Mount card element to the DOM
+      if (cardElementRef.current) {
+        cardElement.mount(cardElementRef.current);
+      }
+
+      // Cleanup function to unmount when component unmounts or form closes
+      return () => {
+        cardElement.unmount();
+      };
+    }
+  }, [elements, showCheckoutForm, checkoutData.paymentMethod]);
+
+  const fetchCartItems = async () => {
+    try {
+      console.log('Fetching cart items...');
+      setDebugInfo(prev => ({ ...prev, lastFetch: new Date().toLocaleTimeString() }));
+      const response = await apiClient.get('/cart');
+      console.log('Cart response:', response.data);
+      
+      if (response.data.success && response.data.cart && response.data.cart.items) {
+        console.log(`Cart has ${response.data.cart.items.length} items`);
+        setCartItems(response.data.cart.items);
+      } else {
+        console.log('No cart items found or invalid response structure');
+        setCartItems([]);
+      }
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
+      }
+      setCartItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('❌ No auth token found - user not logged in');
+      setLoading(false);
+      return;
+    } else {
+      console.log('✅ Auth token found:', token.substring(0, 20) + '...');
+    }
+
+    fetchCartItems();
+  }, []);
+
+  // Fetch user profile for address pre-population
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const response = await apiClient.get('/users/profile');
+        console.log('User profile for checkout:', response.data);
+        setUserProfile(response.data);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  const updateQuantity = async (itemId, newQuantity) => {
+    try {
+      const updateData = new URLSearchParams();
+      updateData.append('quantity', newQuantity.toString());
+
+      await apiClient({
+        method: 'PUT',
+        url: `/cart/items/${itemId}`,
+        data: updateData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      });
+
+      setCartItems(cartItems.map(item => 
+        item.id === itemId ? { ...item, quantity: newQuantity } : item
+      ));
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
+  };
+
+  const removeItem = async (itemId) => {
+    try {
+      await apiClient.delete(`/cart/items/${itemId}`);
+      setCartItems(cartItems.filter(item => item.id !== itemId));
+    } catch (error) {
+      console.error('Error removing item:', error);
+    }
+  };
+
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + (item.productPrice * item.quantity), 0).toFixed(2);
+  };
+
+  const fillTestCardData = () => {
+    setCheckoutData(prev => ({
+      ...prev,
+      cardholderName: DEFAULT_TEST_CARD.name
+    }));
+    // Note: We don't fill card number, expiry, CVC anymore - Stripe Elements handles that
+  };
+
+  const handleCheckout = () => {
+    const updatedCheckoutData = { ...checkoutData };
+    
+    if (userProfile?.address) {
+      updatedCheckoutData.shippingAddress = userProfile.address;
+    }
+    
+    if (userProfile?.phone) {
+      updatedCheckoutData.phone = userProfile.phone;
+    }
+    
+    if (userProfile?.email) {
+      updatedCheckoutData.email = userProfile.email;
+    }
+    
+    if (userProfile?.lastName || userProfile?.firstName) {
+      const contactPersonName = [userProfile?.lastName, userProfile?.firstName]
+        .filter(name => name && name.trim())
+        .join(' ');
+      updatedCheckoutData.contactPerson = contactPersonName;
+    }
+    
+    setCheckoutData(updatedCheckoutData);
+    setShowCheckoutForm(true);
+  };
+
+  const handleCheckoutFormSubmit = async (e) => {
+    e.preventDefault();
+    setProcessingOrder(true);
+    setPaymentError('');
+
+    const originalCartItems = [...cartItems];
+
+    try {
+      console.log('Starting checkout process...');
+
+      // Validate form data
+      if (!checkoutData.shippingAddress.trim()) {
+        throw new Error('Shipping address is required');
+      }
+      if (!checkoutData.phone.trim()) {
+        throw new Error('Phone number is required');
+      }
+      if (!checkoutData.email.trim()) {
+        throw new Error('Email address is required');
+      }
+      if (!checkoutData.contactPerson.trim()) {
+        throw new Error('Contact person is required');
+      }
+
+      // Validate credit card fields
+      if (checkoutData.paymentMethod === 'credit_card') {
+        if (!checkoutData.cardholderName.trim()) {
+          throw new Error('Cardholder name is required');
+        }
+        if (!stripe || !elements) {
+          throw new Error('Payment system is not ready. Please wait a moment and try again.');
+        }
+      }
+
+      // Step 1: Create order
+      const orderData = new URLSearchParams();
+      orderData.append('shippingAddress', checkoutData.shippingAddress);
+      orderData.append('billingAddress', checkoutData.billingAddress || checkoutData.shippingAddress);
+      orderData.append('paymentMethod', checkoutData.paymentMethod);
+      orderData.append('contact_phone', checkoutData.phone);
+      orderData.append('contact_email', checkoutData.email);
+      orderData.append('contact_person', checkoutData.contactPerson);
+
+      console.log('Creating order with data:', {
+        shippingAddress: checkoutData.shippingAddress,
+        billingAddress: checkoutData.billingAddress || checkoutData.shippingAddress,
+        paymentMethod: checkoutData.paymentMethod,
+        contact_phone: checkoutData.phone,
+        contact_email: checkoutData.email,
+        contact_person: checkoutData.contactPerson
+      });
+
+      const orderResponse = await apiClient.post('/orders', orderData.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      });
+
+      console.log('Order response:', orderResponse.data);
+
+      if (!orderResponse.data.success) {
+        throw new Error(orderResponse.data.error || 'Failed to create order');
+      }
+
+      const order = orderResponse.data.order;
+      console.log('Order created successfully, ID:', order.id);
+      setDebugInfo(prev => ({ ...prev, orderCreated: true }));
+
+      // Step 2: Process payment if credit card
+      if (checkoutData.paymentMethod === 'credit_card') {
+        setProcessingPayment(true);
+        console.log('Processing credit card payment with Stripe Elements...');
+        
+        // Create payment intent first (without card)
+        const paymentIntentResponse = await apiClient.post(`/payment/create-intent?orderId=${order.id}`);
+
+        if (!paymentIntentResponse.data.success) {
+          throw new Error('Failed to create payment intent: ' + (paymentIntentResponse.data.error || 'Unknown error'));
+        }
+
+        const { clientSecret, paymentIntentId } = paymentIntentResponse.data.data;
+        console.log('Payment intent created, confirming with Stripe...');
+
+        // Confirm payment with Stripe Elements
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement('card'),
+            billing_details: {
+              name: checkoutData.cardholderName,
+              email: checkoutData.email,
+              phone: checkoutData.phone,
+              address: {
+                line1: checkoutData.shippingAddress,
+              }
+            },
+          },
+        });
+
+        if (confirmError) {
+          console.error('Stripe confirmation error:', confirmError);
+          throw new Error(confirmError.message);
+        }
+
+        console.log('Payment confirmed successfully:', paymentIntent);
+        
+        // Verify payment status
+        if (paymentIntent.status === 'succeeded') {
+          console.log('✅ Payment completed successfully');
+        } else {
+          console.log('🔄 Payment status:', paymentIntent.status);
+          // You might want to handle other statuses like 'processing' differently
+        }
+      }
+
+      // Only clear cart after BOTH order creation AND payment are successful
+      console.log('Order and payment completed successfully, clearing cart...');
+      setCartItems([]);
+      setDebugInfo(prev => ({ ...prev, cartCleared: true }));
+      setShowCheckoutForm(false);
+      
+      // Navigate to order confirmation
+      alert(`${t('paymentSuccess')} Order ID: ${order.id || 'N/A'}`);
+      navigate('/order-history');
+      
+    } catch (error) {
+      console.error('Checkout error:', error);
+      console.error('Error details:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        url: error.config?.url,
+        method: error.config?.method
+      });
+      
+      let errorMessage = t('paymentError');
+      
+      if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      setPaymentError(errorMessage);
+      alert(errorMessage);
+      
+      // Restore original cart items on error
+      console.log('Error occurred, restoring original cart items...');
+      setCartItems(originalCartItems);
+    } finally {
+      setProcessingOrder(false);
+      setProcessingPayment(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCheckoutData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  if (loading) return <div>{t('loading')}</div>;
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return (
+      <div className="cart">
+        <h1>{t('cart')}</h1>
+        <div className="empty-cart">
+          <p>{t('loginRequired')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="cart">
+      <h1>{t('cart')}</h1>
+      
+      {cartItems.length === 0 ? (
+        <div className="empty-cart">
+          <p>{t('emptyCart')}</p>
+          <button 
+            onClick={() => navigate('/products')} 
+            className="continue-shopping-btn"
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              marginTop: '10px'
+            }}
+          >
+            {t('continueShopping')}
+          </button>
+        </div>
+      ) : (
+        <div className="cart-content">
+          <div className="cart-items">
+            {cartItems.map((item) => (
+              <div key={item.id} className="cart-item">
+                <div className="item-image">
+                  <img 
+                    src={getFullImageUrl(item.productImageUrl)} 
+                    alt={item.productAltTextEn} 
+                    style={{width: '80px', height: '80px', objectFit: 'cover'}}
+                  />
+                </div>
+                <div className="item-info">
+                  <h3>{item.productNameEn}</h3>
+                  <p className="chinese-name">{item.productNameZh}</p>
+                  <p>${(item.productPrice).toFixed(2)}</p>
+                </div>
+                <div className="quantity-controls">
+                  <button 
+                    onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                    disabled={item.quantity <= 1}
+                  >
+                    -
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                </div>
+                <div className="item-total">
+                  ${(item.productPrice * item.quantity).toFixed(2)}
+                </div>
+                <button onClick={() => removeItem(item.id)} className="remove-btn">
+                  {t('remove')}
+                </button>
+              </div>
+            ))}
+          </div>
+          
+          <div className="cart-summary">
+            <h3>{t('total')}: ${getTotalPrice()}</h3>
+            <button 
+              className="checkout-btn" 
+              onClick={handleCheckout}
+              disabled={processingOrder || processingPayment}
+            >
+              {processingOrder || processingPayment ? t('processing') + '...' : t('proceedToCheckout')}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Checkout Form Modal */}
+      {showCheckoutForm && (
+        <div className="checkout-modal">
+          <div className="checkout-form">
+            <h2>{t('checkout')}</h2>
+            <form onSubmit={handleCheckoutFormSubmit}>
+              <div className="form-group">
+                <label htmlFor="contactPerson">{t('contactPerson')}:</label>
+                <input
+                  type="text"
+                  id="contactPerson"
+                  name="contactPerson"
+                  value={checkoutData.contactPerson}
+                  onChange={handleInputChange}
+                  required
+                  placeholder={t('contactPersonPlaceholder')}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="phone">{t('phone')}:</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={checkoutData.phone}
+                  onChange={handleInputChange}
+                  required
+                  placeholder={t('phonePlaceholder')}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="email">{t('email')}:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={checkoutData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder={t('emailPlaceholder')}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="shippingAddress">{t('shippingAddress')}:</label>
+                <textarea
+                  id="shippingAddress"
+                  name="shippingAddress"
+                  value={checkoutData.shippingAddress}
+                  onChange={handleInputChange}
+                  required
+                  rows="3"
+                  placeholder={t('addressPlaceholder')}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="billingAddress">{t('billingAddress')}:</label>
+                <textarea
+                  id="billingAddress"
+                  name="billingAddress"
+                  value={checkoutData.billingAddress}
+                  onChange={handleInputChange}
+                  rows="3"
+                  placeholder={t('billingAddressPlaceholder')}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="paymentMethod">{t('paymentMethod')}:</label>
+                <select
+                  id="paymentMethod"
+                  name="paymentMethod"
+                  value={checkoutData.paymentMethod}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="credit_card">{t('creditCard')}</option>
+                </select>
+              </div>
+
+              {/* Credit Card Fields - Now using Stripe Elements */}
+              {checkoutData.paymentMethod === 'credit_card' && (
+                <div className="credit-card-section">
+                  <h4>{t('creditCard')} {t('details', 'Details')}</h4>
+                  
+                  <div className="test-card-helper">
+                    <button 
+                      type="button" 
+                      onClick={fillTestCardData}
+                      className="test-card-btn"
+                    >
+                      {t('useTestCard')}
+                    </button>
+                    <small style={{display: 'block', marginTop: '5px', color: '#666'}}>
+                      Test card: 4242424242424242 | Any future expiry | Any 3 digits
+                    </small>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="cardholderName">{t('cardholderName')}:</label>
+                    <input
+                      type="text"
+                      id="cardholderName"
+                      name="cardholderName"
+                      value={checkoutData.cardholderName}
+                      onChange={handleInputChange}
+                      placeholder={t('cardholderPlaceholder')}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Card Details:</label>
+                    <div 
+                      ref={cardElementRef}
+                      className="stripe-card-element"
+                      style={{
+                        padding: '10px 12px',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px',
+                        backgroundColor: 'white',
+                        marginBottom: '10px'
+                      }}
+                    >
+                      {/* Stripe Card Element will be mounted here */}
+                    </div>
+                    <small style={{color: '#666'}}>
+                      Test with: 4242424242424242, any future expiry date, any 3-digit CVC
+                    </small>
+                  </div>
+
+                  {paymentError && (
+                    <div className="payment-error">
+                      {paymentError}
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              <div className="form-actions">
+                <button 
+                  type="button" 
+                  onClick={() => setShowCheckoutForm(false)}
+                  disabled={processingOrder || processingPayment}
+                >
+                  {t('cancel')}
+                </button>
+                <button 
+                  type="submit" 
+                  disabled={processingOrder || processingPayment || !stripe}
+                >
+                  {processingPayment ? t('paymentProcessing') : 
+                   processingOrder ? t('processing') : 
+                   `${t('placeOrder')} ($${getTotalPrice()})`}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Cart;

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡我們 - 優質傢俱</title>
+    <meta name="description" content="聯絡優質傢俱，我們的專業團隊隨時為您提供傢俱選購建議和客戶服務。電話：(02) 1234-5678，地址：台北市信義區101號">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header (Same as index.html) -->
+    <header class="header">
+        <!-- Include same navigation as index.html -->
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">首頁</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>聯絡我們</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>聯絡我們</h1>
+                <p>我們隨時為您提供專業的傢俱建議和客戶服務</p>
+            </div>
+
+            <div class="contact-page">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>地址</h3>
+                        <p>台北市信義區101號</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>電話</h3>
+                        <p>(02) 1234-5678</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>電子郵件</h3>
+                        <p>info@furniture.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>營業時間</h3>
+                        <p>週一至週日: 09:00 - 21:00</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h2>發送訊息給我們</h2>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">姓名 *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">電子郵件 *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">電話</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">主題 *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">請選擇主題</option>
+                                <option value="product">產品詢問</option>
+                                <option value="service">客戶服務</option>
+                                <option value="complaint">投訴建議</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">訊息 *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">發送訊息</button>
+                    </form>
+                </div>
+
+                <div class="map-section">
+                    <h2>我們的位置</h2>
+                    <div class="map-container">
+                        <!-- In a real implementation, you would embed a Google Maps iframe here -->
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p>地圖載入中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Same as index.html) -->
+    <footer class="footer">
+        <!-- Include same footer as index.html -->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

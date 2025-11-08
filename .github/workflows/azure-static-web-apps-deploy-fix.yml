@@ -1,0 +1,49 @@
+name: Azure Static Web Apps CI/CD (fix)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: ./reactjs/furnitureStore
+        run: npm ci
+
+      - name: Set production backend (switch:prod)
+        working-directory: ./reactjs/furnitureStore
+        run: npm run switch:prod
+
+      - name: Build production assets
+        working-directory: ./reactjs/furnitureStore
+        run: npm run build
+
+      - name: Deploy to Azure Static Web Apps (upload prebuilt)
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # Replace this with the secret name the Azure Static Web App created in your repo, if different.
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # used to create PR comments and check status
+          action: "upload"
+          # Set app_location to the folder containing package.json relative to repo root
+          app_location: "reactjs/furnitureStore"
+          api_location: ""
+          output_location: "reactjs/furnitureStore/dist"
+          skip_app_build: true
+
+    # end job

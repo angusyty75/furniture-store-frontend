@@ -1,0 +1,45 @@
+﻿2025-11-08T11:15:45.3551543Z ##[group]Run Azure/static-web-apps-deploy@v1
+2025-11-08T11:15:45.3551851Z with:
+2025-11-08T11:15:45.3552525Z   azure_static_web_apps_api_token: ***
+2025-11-08T11:15:45.3552890Z   repo_token: ***
+2025-11-08T11:15:45.3553088Z   action: upload
+2025-11-08T11:15:45.3553263Z   app_location: /
+2025-11-08T11:15:45.3553445Z   output_location: dist
+2025-11-08T11:15:45.3553646Z ##[endgroup]
+2025-11-08T11:15:45.3644772Z ##[command]/usr/bin/docker run --name feda25b0ea52e664ce0a34a14d1665f254f_2514e3 --label 488fed --workdir /github/workspace --rm -e "INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN" -e "INPUT_REPO_TOKEN" -e "INPUT_ACTION" -e "INPUT_APP_LOCATION" -e "INPUT_API_LOCATION" -e "INPUT_OUTPUT_LOCATION" -e "INPUT_API_BUILD_COMMAND" -e "INPUT_APP_ARTIFACT_LOCATION" -e "INPUT_APP_BUILD_COMMAND" -e "INPUT_ROUTES_LOCATION" -e "INPUT_SKIP_APP_BUILD" -e "INPUT_CONFIG_FILE_LOCATION" -e "INPUT_SKIP_API_BUILD" -e "INPUT_PRODUCTION_BRANCH" -e "INPUT_DEPLOYMENT_ENVIRONMENT" -e "INPUT_IS_STATIC_EXPORT" -e "INPUT_DATA_API_LOCATION" -e "INPUT_GITHUB_ID_TOKEN" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/furniture-store-frontend/furniture-store-frontend":"/github/workspace" 488fed:a25b0ea52e664ce0a34a14d1665f254f
+2025-11-08T11:15:46.1922483Z DeploymentId: bc5b165e-ecdc-4ca3-a0e2-cea597f28ce2
+2025-11-08T11:15:46.1923054Z 
+2025-11-08T11:15:46.3088603Z [37mTry to validate location at: '/github/workspace'.[0m
+2025-11-08T11:15:46.3100384Z [37mApp Directory Location: '/' was found.[0m
+2025-11-08T11:15:46.3101105Z [37mTry to validate location at: '/github/workspace/swa-db-connections'.[0m
+2025-11-08T11:15:46.3104121Z [37mLooking for event info[0m
+2025-11-08T11:15:48.2457110Z [37mStarting to build app with Oryx[0m
+2025-11-08T11:15:48.2458835Z [33mAzure Static Web Apps utilizes Oryx to build both static applications and Azure Functions. You can find more details on Oryx here: https://github.com/microsoft/Oryx[0m
+2025-11-08T11:15:48.2460001Z [37m---Oryx build logs---[0m
+2025-11-08T11:15:48.2460416Z [37m[0m
+2025-11-08T11:15:48.2460789Z [37m[0m
+2025-11-08T11:15:48.5636343Z [37mOperation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx[0m
+2025-11-08T11:15:48.5637323Z [37mYou can report issues at https://github.com/Microsoft/Oryx/issues[0m
+2025-11-08T11:15:48.5637841Z [37m[0m
+2025-11-08T11:15:48.5638865Z [37mOryx Version: 0.2.20250107.1+ef3fb2f9c490a4fbb1f76b5746cd4ba2ff0409f4, Commit: ef3fb2f9c490a4fbb1f76b5746cd4ba2ff0409f4, ReleaseTagName: 20250107.1[0m
+2025-11-08T11:15:48.5639841Z [37m[0m
+2025-11-08T11:15:48.5640162Z [37mBuild Operation ID: 391d24a5e20010fd[0m
+2025-11-08T11:15:48.5640931Z [37mOS Type           : bullseye[0m
+2025-11-08T11:15:48.5641331Z [37mImage Type        : githubactions[0m
+2025-11-08T11:15:48.5641686Z [37m[0m
+2025-11-08T11:15:48.5758714Z [37mDetecting platforms...[0m
+2025-11-08T11:15:48.5948125Z [37mCould not detect any platform in the source directory.[0m
+2025-11-08T11:15:48.6094454Z [31mError: Could not detect the language from repo.[0m
+2025-11-08T11:15:48.7753007Z [37m[0m
+2025-11-08T11:15:48.7753293Z [37m[0m
+2025-11-08T11:15:48.7753524Z [37m---End of Oryx build logs---[0m
+2025-11-08T11:15:48.7773041Z [33mOryx was unable to determine the build steps. Continuing assuming the assets in this folder are already built. If this is an unexpected behavior please contact support.[0m
+2025-11-08T11:15:48.7827743Z [37mFinished building app with Oryx[0m
+2025-11-08T11:15:48.7878431Z [31mFailed to find a default file in the app artifacts folder (/). Valid default files: index.html,Index.html.[0m
+2025-11-08T11:15:48.7879801Z [31mIf your application contains purely static content, please verify that the variable 'app_location' in your workflow file points to the root of your application.[0m
+2025-11-08T11:15:48.7881159Z [31mIf your application requires build steps, please validate that a default file exists in the build output directory.[0m
+2025-11-08T11:15:48.7881841Z [31m[0m
+2025-11-08T11:15:49.0129907Z [37m[0m
+2025-11-08T11:15:49.0131053Z [33mFor further information, please visit the Azure Static Web Apps documentation at https://docs.microsoft.com/en-us/azure/static-web-apps/[0m
+2025-11-08T11:15:49.0136202Z [33mIf you believe this behavior is unexpected, please raise a GitHub issue at https://github.com/azure/static-web-apps/issues/[0m
+2025-11-08T11:15:49.0137220Z [33mExiting[0m

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>優質傢俱 - 您的傢俱首選</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html" class="logo">優質傢俱</a>
+                </div>
+                
+                <div class="nav-menu">
+                    <div class="nav-item">
+                        <a href="index.html" class="nav-link active">首頁</a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="products.html" class="nav-link">產品分類 <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="products.html?category=sofa">沙發</a>
+                            <a href="products.html?category=table">餐桌椅</a>
+                            <a href="products.html?category=bed">床組</a>
+                            <a href="products.html?category=cabinet">櫃子</a>
+                            <a href="products.html?category=office">辦公傢俱</a>
+                        </div>
+                    </div>
+                    <div class="nav-item">
+                        <a href="about.html" class="nav-link">關於我們</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="contact.html" class="nav-link">聯絡我們</a>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="搜尋產品...">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <div class="language-switcher">
+                        <select id="languageSelect">
+                            <option value="zh" selected>繁體中文</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+
+                    <div class="user-actions">
+                        <a href="login.html" class="user-btn" id="loginBtn">
+                            <i class="fas fa-user"></i>
+                            <span>登入</span>
+                        </a>
+                        <a href="cart.html" class="cart-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">打造完美家居空間</h1>
+                <p class="hero-subtitle">精選優質傢俱，為您的生活增添舒適與品味</p>
+                <div class="hero-buttons">
+                    <a href="products.html" class="btn btn-primary">立即選購</a>
+                    <a href="about.html" class="btn btn-secondary">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="現代傢俱展示">
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="categories-section">
+            <div class="container">
+                <h2 class="section-title">產品分類</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1758&q=80" alt="沙發">
+                        </div>
+                        <div class="category-info">
+                            <h3>沙發</h3>
+                            <p>舒適休閒沙發組合</p>
+                            <a href="products.html?category=sofa" class="category-link">查看產品</a>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="餐桌椅">
+                        </div>
+                        <div class="category-info">
+                            <h3>餐桌椅</h3>
+                            <p>精緻用餐傢俱</p>
+                            <a href="products.html?category=table" class="category-link">查看產品</a>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="床組">
+                        </div>
+                        <div class="category-info">
+                            <h3>床組</h3>
+                            <p>優質睡眠系統</p>
+                            <a href="products.html?category=bed" class="category-link">查看產品</a>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="櫃子">
+                        </div>
+                        <div class="category-info">
+                            <h3>櫃子</h3>
+                            <p>收納整理解決方案</p>
+                            <a href="products.html?category=cabinet" class="category-link">查看產品</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">熱門產品</h2>
+                    <a href="products.html" class="view-all">查看全部 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h3>免費送貨</h3>
+                        <p>訂單滿$3000免運費</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>品質保證</h3>
+                        <p>所有產品品質把關</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-undo"></i>
+                        <h3>30天退貨</h3>
+                        <p>不滿意30天內退貨</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <h3>線上客服</h3>
+                        <p>專業客服為您服務</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>優質傢俱</h3>
+                    <p>為您提供最優質的傢俱選擇，打造舒適家居生活。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>快速連結</h4>
+                    <ul>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="products.html">所有產品</a></li>
+                        <li><a href="about.html">關於我們</a></li>
+                        <li><a href="contact.html">聯絡我們</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>客戶服務</h4>
+                    <ul>
+                        <li><a href="faq.html">常見問題</a></li>
+                        <li><a href="shipping.html">運送資訊</a></li>
+                        <li><a href="returns.html">退換貨政策</a></li>
+                        <li><a href="privacy.html">隱私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>聯絡資訊</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 台北市信義區101號</li>
+                        <li><i class="fas fa-phone"></i> (02) 1234-5678</li>
+                        <li><i class="fas fa-envelope"></i> info@furniture.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 優質傢俱. 版權所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+{
+  "total_count": 2,
+  "jobs": [
+    {
+      "id": 54868353745,
+      "run_id": 19192280341,
+      "workflow_name": "Azure Static Web Apps CI/CD",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/angusyty75/furniture-store-frontend/actions/runs/19192280341",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOQRr4as8AAAAMxmii0Q",
+      "head_sha": "65a1332dac02c51489fb162f71d3cfa8b94b9eb8",
+      "url": "https://api.github.com/repos/angusyty75/furniture-store-frontend/actions/jobs/54868353745",
+      "html_url": "https://github.com/angusyty75/furniture-store-frontend/actions/runs/19192280341/job/54868353745",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2025-11-08T11:15:13Z",
+      "started_at": "2025-11-08T11:15:19Z",
+      "completed_at": "2025-11-08T11:15:50Z",
+      "name": "Build and Deploy Job",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2025-11-08T11:15:20Z",
+          "completed_at": "2025-11-08T11:15:21Z"
+        },
+        {
+          "name": "Build Azure/static-web-apps-deploy@v1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2025-11-08T11:15:21Z",
+          "completed_at": "2025-11-08T11:15:44Z"
+        },
+        {
+          "name": "Run actions/checkout@v3",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2025-11-08T11:15:44Z",
+          "completed_at": "2025-11-08T11:15:45Z"
+        },
+        {
+          "name": "Build And Deploy",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 4,
+          "started_at": "2025-11-08T11:15:45Z",
+          "completed_at": "2025-11-08T11:15:49Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v3",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2025-11-08T11:15:49Z",
+          "completed_at": "2025-11-08T11:15:49Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2025-11-08T11:15:49Z",
+          "completed_at": "2025-11-08T11:15:49Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/angusyty75/furniture-store-frontend/check-runs/54868353745",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000009,
+      "runner_name": "GitHub Actions 1000000009",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 54868353777,
+      "run_id": 19192280341,
+      "workflow_name": "Azure Static Web Apps CI/CD",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/angusyty75/furniture-store-frontend/actions/runs/19192280341",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOQRr4as8AAAAMxmii8Q",
+      "head_sha": "65a1332dac02c51489fb162f71d3cfa8b94b9eb8",
+      "url": "https://api.github.com/repos/angusyty75/furniture-store-frontend/actions/jobs/54868353777",
+      "html_url": "https://github.com/angusyty75/furniture-store-frontend/actions/runs/19192280341/job/54868353777",
+      "status": "completed",
+      "conclusion": "skipped",
+      "created_at": "2025-11-08T11:15:13Z",
+      "started_at": "2025-11-08T11:15:13Z",
+      "completed_at": "2025-11-08T11:15:13Z",
+      "name": "Close Pull Request Job",
+      "steps": [
+
+      ],
+      "check_run_url": "https://api.github.com/repos/angusyty75/furniture-store-frontend/check-runs/54868353777",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": null,
+      "runner_name": null,
+      "runner_group_id": null,
+      "runner_group_name": null
+    }
+  ]
+}

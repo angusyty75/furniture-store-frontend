@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Test - Furniture Store</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { background: #f5f5f5; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+        code { background: #e0e0e0; padding: 2px 5px; border-radius: 3px; }
+        h1 { color: #333; }
+        h2 { color: #666; }
+    </style>
+</head>
+<body>
+    <h1>🔍 SEO Implementation Test</h1>
+    <p><strong>Test URL:</strong> <a href="http://localhost:5174/" target="_blank">http://localhost:5174/</a></p>
+    
+    <div class="test-section">
+        <h2>✅ What We've Implemented</h2>
+        <ul>
+            <li><strong>Native JavaScript SEO Hook:</strong> <code>useSEO</code> for dynamic title, description, keywords, and Open Graph tags</li>
+            <li><strong>Base HTML Meta Tags:</strong> Complete SEO foundation in <code>index.html</code></li>
+            <li><strong>Dynamic Page SEO:</strong> Each page (Home, Products, Cart, Product Detail) has specific SEO</li>
+            <li><strong>Structured Data:</strong> JSON-LD for Organization, Website, and Product schemas</li>
+            <li><strong>Zero Dependencies:</strong> No external libraries, pure React + vanilla JavaScript</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Manual Testing Steps</h2>
+        <ol>
+            <li><strong>Page Title Test:</strong> 
+                <br>• Navigate to different pages on your site
+                <br>• Check browser tab title changes for each page
+                <br>• Home: "Home - Premium Furniture Store | Furniture Store"
+                <br>• Products: "All Products - Premium Furniture Collection | Furniture Store"
+            </li>
+            <li><strong>Meta Tags Test:</strong>
+                <br>• Right-click → "View Page Source"
+                <br>• Look for <code>&lt;meta name="description"&gt;</code> tags
+                <br>• Verify Open Graph tags: <code>&lt;meta property="og:title"&gt;</code>
+            </li>
+            <li><strong>Structured Data Test:</strong>
+                <br>• In page source, look for <code>&lt;script type="application/ld+json"&gt;</code>
+                <br>• Use Google's Rich Results Test: <a href="https://search.google.com/test/rich-results" target="_blank">Rich Results Test</a>
+            </li>
+            <li><strong>SEO Validation:</strong>
+                <br>• Use browser dev tools → Console (no SEO-related errors)
+                <br>• Test with SEO tools like Lighthouse (in Chrome DevTools)
+            </li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Developer Tools Testing</h2>
+        <p><strong>Chrome DevTools Test:</strong></p>
+        <ol>
+            <li>Open <a href="http://localhost:5174/" target="_blank">your site</a></li>
+            <li>Press F12 to open DevTools</li>
+            <li>Go to "Lighthouse" tab</li>
+            <li>Click "Generate report" for SEO analysis</li>
+            <li>Check the SEO score (should be much improved)</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Benefits of This Implementation</h2>
+        <ul>
+            <li>✅ <strong>No Dependencies:</strong> Won't break your development environment</li>
+            <li>✅ <strong>Dynamic Content:</strong> SEO updates based on product data</li>
+            <li>✅ <strong>Social Sharing:</strong> Open Graph tags for Facebook, LinkedIn, etc.</li>
+            <li>✅ <strong>Search Engines:</strong> Proper title, description, and structured data</li>
+            <li>✅ <strong>Performance:</strong> Lightweight, no bundle size increase</li>
+            <li>✅ <strong>Maintainable:</strong> Simple hook-based approach</li>
+        </ul>
+    </div>
+
+    <script>
+        // Simple JavaScript to check if the main site loads correctly
+        fetch('http://localhost:5174/')
+            .then(response => {
+                if (response.ok) {
+                    document.querySelector('h1').innerHTML += ' <span class="pass">[Site Accessible ✓]</span>';
+                } else {
+                    document.querySelector('h1').innerHTML += ' <span class="fail">[Site Error ✗]</span>';
+                }
+            })
+            .catch(err => {
+                document.querySelector('h1').innerHTML += ' <span class="fail">[Connection Error ✗]</span>';
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- Add these dependencies to your backend pom.xml for email functionality -->
+
+<dependencies>
+    <!-- Existing dependencies... -->
+    
+    <!-- JavaMail API for sending emails -->
+    <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>javax.mail</artifactId>
+        <version>1.6.2</version>
+    </dependency>
+    
+    <!-- Or use the newer Jakarta Mail (if you're using Jakarta EE) -->
+    <!-- 
+    <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>jakarta.mail</artifactId>
+        <version>2.0.1</version>
+    </dependency>
+    -->
+    
+</dependencies>

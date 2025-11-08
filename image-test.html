@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image URL Test</title>
+</head>
+<body>
+    <h1>Image URL Test</h1>
+    <div id="test-results"></div>
+    
+    <script>
+        // Test getFullImageUrl function
+        const currentPort = window.location.port;
+        console.log('Current port:', currentPort);
+        
+        let backendPort;
+        switch (currentPort) {
+            case '5173':
+            case '5175':
+                backendPort = '8081';
+                break;
+            case '5174':
+            case '4173':
+                backendPort = '8080';
+                break;
+            default:
+                backendPort = '8081';
+        }
+        
+        const testUrls = [
+            'images/products/fabric-sofa-001-main.jpg',
+            'sofa1.jpg',
+            '/images/placeholder.jpg',
+            null
+        ];
+        
+        const results = document.getElementById('test-results');
+        results.innerHTML = `<h2>Backend Port: ${backendPort}</h2>`;
+        
+        testUrls.forEach(url => {
+            const fullUrl = url ? `http://localhost:${backendPort}/furniture-store/${url.startsWith('/') ? url.substring(1) : url}` : `http://localhost:${backendPort}/furniture-store/images/placeholder.jpg`;
+            results.innerHTML += `
+                <div>
+                    <p><strong>Input:</strong> ${url || 'null'}</p>
+                    <p><strong>Output:</strong> ${fullUrl}</p>
+                    <img src="${fullUrl}" alt="Test" style="width:100px;height:100px;object-fit:cover;" onerror="this.style.border='2px solid red';" onload="this.style.border='2px solid green';">
+                    <hr>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

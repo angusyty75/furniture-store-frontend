@@ -1,0 +1,94 @@
+﻿2025-11-08T11:15:44.5690291Z ##[group]Run actions/checkout@v3
+2025-11-08T11:15:44.5690940Z with:
+2025-11-08T11:15:44.5691126Z   submodules: true
+2025-11-08T11:15:44.5691318Z   lfs: false
+2025-11-08T11:15:44.5691542Z   repository: angusyty75/furniture-store-frontend
+2025-11-08T11:15:44.5691976Z   token: ***
+2025-11-08T11:15:44.5692155Z   ssh-strict: true
+2025-11-08T11:15:44.5692351Z   persist-credentials: true
+2025-11-08T11:15:44.5692563Z   clean: true
+2025-11-08T11:15:44.5692748Z   sparse-checkout-cone-mode: true
+2025-11-08T11:15:44.5692972Z   fetch-depth: 1
+2025-11-08T11:15:44.5693149Z   fetch-tags: false
+2025-11-08T11:15:44.5693333Z   set-safe-directory: true
+2025-11-08T11:15:44.5693740Z ##[endgroup]
+2025-11-08T11:15:44.6531922Z Syncing repository: angusyty75/furniture-store-frontend
+2025-11-08T11:15:44.6533250Z ##[group]Getting Git version info
+2025-11-08T11:15:44.6533765Z Working directory is '/home/runner/work/furniture-store-frontend/furniture-store-frontend'
+2025-11-08T11:15:44.6534455Z [command]/usr/bin/git version
+2025-11-08T11:15:44.6539028Z git version 2.51.2
+2025-11-08T11:15:44.6566118Z ##[endgroup]
+2025-11-08T11:15:44.6582961Z Temporarily overriding HOME='/home/runner/work/_temp/7fe6324b-c38d-432f-a59b-7de02064bb1e' before making global git config changes
+2025-11-08T11:15:44.6584349Z Adding repository directory to the temporary git global config as a safe directory
+2025-11-08T11:15:44.6588172Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/furniture-store-frontend/furniture-store-frontend
+2025-11-08T11:15:44.6672441Z Deleting the contents of '/home/runner/work/furniture-store-frontend/furniture-store-frontend'
+2025-11-08T11:15:44.6676049Z ##[group]Initializing the repository
+2025-11-08T11:15:44.6679217Z [command]/usr/bin/git init /home/runner/work/furniture-store-frontend/furniture-store-frontend
+2025-11-08T11:15:44.7238323Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-11-08T11:15:44.7239345Z hint: is subject to change. To configure the initial branch name to use in all
+2025-11-08T11:15:44.7240080Z hint: of your new repositories, which will suppress this warning, call:
+2025-11-08T11:15:44.7240596Z hint:
+2025-11-08T11:15:44.7241031Z hint: 	git config --global init.defaultBranch <name>
+2025-11-08T11:15:44.7241452Z hint:
+2025-11-08T11:15:44.7241847Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-11-08T11:15:44.7242498Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-11-08T11:15:44.7243006Z hint:
+2025-11-08T11:15:44.7243275Z hint: 	git branch -m <name>
+2025-11-08T11:15:44.7243587Z hint:
+2025-11-08T11:15:44.7244011Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-11-08T11:15:44.7284763Z Initialized empty Git repository in /home/runner/work/furniture-store-frontend/furniture-store-frontend/.git/
+2025-11-08T11:15:44.7296918Z [command]/usr/bin/git remote add origin https://github.com/angusyty75/furniture-store-frontend
+2025-11-08T11:15:44.7370656Z ##[endgroup]
+2025-11-08T11:15:44.7371510Z ##[group]Disabling automatic garbage collection
+2025-11-08T11:15:44.7374719Z [command]/usr/bin/git config --local gc.auto 0
+2025-11-08T11:15:44.7402632Z ##[endgroup]
+2025-11-08T11:15:44.7402967Z ##[group]Setting up auth
+2025-11-08T11:15:44.7408288Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-11-08T11:15:44.7434745Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-11-08T11:15:44.8835758Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-11-08T11:15:44.8866549Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-11-08T11:15:44.9105062Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-11-08T11:15:44.9143086Z ##[endgroup]
+2025-11-08T11:15:44.9143693Z ##[group]Fetching the repository
+2025-11-08T11:15:44.9154104Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +65a1332dac02c51489fb162f71d3cfa8b94b9eb8:refs/remotes/origin/main
+2025-11-08T11:15:45.1123238Z remote: Enumerating objects: 5, done.        
+2025-11-08T11:15:45.1123966Z remote: Counting objects:  20% (1/5)        
+2025-11-08T11:15:45.1124552Z remote: Counting objects:  40% (2/5)        
+2025-11-08T11:15:45.1125125Z remote: Counting objects:  60% (3/5)        
+2025-11-08T11:15:45.1126079Z remote: Counting objects:  80% (4/5)        
+2025-11-08T11:15:45.1126668Z remote: Counting objects: 100% (5/5)        
+2025-11-08T11:15:45.1127278Z remote: Counting objects: 100% (5/5), done.        
+2025-11-08T11:15:45.1127936Z remote: Compressing objects:  33% (1/3)        
+2025-11-08T11:15:45.1128429Z remote: Compressing objects:  66% (2/3)        
+2025-11-08T11:15:45.1128970Z remote: Compressing objects: 100% (3/3)        
+2025-11-08T11:15:45.1129523Z remote: Compressing objects: 100% (3/3), done.        
+2025-11-08T11:15:45.1130158Z remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-11-08T11:15:45.1501165Z From https://github.com/angusyty75/furniture-store-frontend
+2025-11-08T11:15:45.1501965Z  * [new ref]         65a1332dac02c51489fb162f71d3cfa8b94b9eb8 -> origin/main
+2025-11-08T11:15:45.1593547Z ##[endgroup]
+2025-11-08T11:15:45.1594244Z ##[group]Determining the checkout info
+2025-11-08T11:15:45.1595781Z ##[endgroup]
+2025-11-08T11:15:45.1596436Z ##[group]Checking out the ref
+2025-11-08T11:15:45.1600611Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-11-08T11:15:45.1693417Z Switched to a new branch 'main'
+2025-11-08T11:15:45.1696250Z branch 'main' set up to track 'origin/main'.
+2025-11-08T11:15:45.1701788Z ##[endgroup]
+2025-11-08T11:15:45.1702159Z ##[group]Setting up auth for fetching submodules
+2025-11-08T11:15:45.1706072Z [command]/usr/bin/git config --global http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-11-08T11:15:45.1740764Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+2025-11-08T11:15:45.1768766Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2025-11-08T11:15:45.1795218Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-217858616@github.com:
+2025-11-08T11:15:45.1819504Z ##[endgroup]
+2025-11-08T11:15:45.1819908Z ##[group]Fetching submodules
+2025-11-08T11:15:45.1825254Z [command]/usr/bin/git submodule sync
+2025-11-08T11:15:45.2043289Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+2025-11-08T11:15:45.2256843Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+2025-11-08T11:15:45.2464702Z ##[endgroup]
+2025-11-08T11:15:45.2465114Z ##[group]Persisting credentials for submodules
+2025-11-08T11:15:45.2472052Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+2025-11-08T11:15:45.2687252Z [command]/usr/bin/git submodule foreach sh -c "git config --local 'http.https://github.com/.extraheader' 'AUTHORIZATION: basic ***' && git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-11-08T11:15:45.2904330Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+2025-11-08T11:15:45.3114511Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-217858616@github.com:'
+2025-11-08T11:15:45.3321456Z ##[endgroup]
+2025-11-08T11:15:45.3354745Z [command]/usr/bin/git log -1 --format='%H'
+2025-11-08T11:15:45.3374618Z '65a1332dac02c51489fb162f71d3cfa8b94b9eb8'

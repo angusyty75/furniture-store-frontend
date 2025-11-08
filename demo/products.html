@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>產品列表 - 優質傢俱</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header (Same as index.html) -->
+    <header class="header">
+        <!-- Include same navigation as index.html -->
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">首頁</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>產品列表</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>所有產品</h1>
+                <p>精選優質傢俱，滿足您的家居需求</p>
+            </div>
+
+            <div class="products-page">
+                <!-- Sidebar Filters -->
+                <aside class="filters-sidebar">
+                    <div class="filter-group">
+                        <h3>產品分類</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="sofa">
+                                <span class="checkmark"></span>
+                                沙發
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="table">
+                                <span class="checkmark"></span>
+                                餐桌椅
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="bed">
+                                <span class="checkmark"></span>
+                                床組
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="cabinet">
+                                <span class="checkmark"></span>
+                                櫃子
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="office">
+                                <span class="checkmark"></span>
+                                辦公傢俱
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>價格範圍</h3>
+                        <div class="price-range">
+                            <input type="range" min="0" max="50000" value="50000" class="price-slider" id="priceRange">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span>$50,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>產品特色</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="feature" value="new">
+                                <span class="checkmark"></span>
+                                新品上市
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="feature" value="sale">
+                                <span class="checkmark"></span>
+                                特價商品
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="feature" value="stock">
+                                <span class="checkmark"></span>
+                                現貨供應
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="filter-btn" onclick="applyFilters()">套用篩選</button>
+                    <button class="filter-btn reset" onclick="resetFilters()">重設篩選</button>
+                </aside>
+
+                <!-- Products Grid -->
+                <section class="products-main">
+                    <div class="products-header">
+                        <div class="products-sort">
+                            <label for="sortSelect">排序方式:</label>
+                            <select id="sortSelect">
+                                <option value="default">預設排序</option>
+                                <option value="price_asc">價格: 低到高</option>
+                                <option value="price_desc">價格: 高到低</option>
+                                <option value="name_asc">名稱: A-Z</option>
+                                <option value="name_desc">名稱: Z-A</option>
+                                <option value="newest">最新上架</option>
+                            </select>
+                        </div>
+                        <div class="products-count">
+                            顯示 <span id="productsCount">12</span> 個產品中的 <span id="showingCount">12</span> 個
+                        </div>
+                    </div>
+
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be loaded here -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn disabled"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Same as index.html) -->
+    <footer class="footer">
+        <!-- Include same footer as index.html -->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
