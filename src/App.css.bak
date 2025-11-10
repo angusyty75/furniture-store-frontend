@@ -1075,11 +1075,32 @@ button.view-product-btn {
   gap: 1rem;
 }
 
+/* Main image container: fixed frame 700x400 by default but responsive */
+.main-image {
+  width: 700px;
+  height: 400px;
+  max-width: 100%; /* allows it to shrink on narrow viewports */
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
 .main-image img {
   width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
+  height: 100%;
+  object-fit: contain; /* ensure whole image is visible and centered */
+  display: block;
+}
+
+/* On small screens, allow the main image to shrink and use viewport height for better fit */
+@media (max-width: 760px) {
+  .main-image {
+    width: calc(100% - 32px);
+    height: min(60vh, 400px);
+  }
 }
 
 .image-thumbnails {

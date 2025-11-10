@@ -18,6 +18,9 @@ import OrderHistory from './pages/OrderHistory';
 import AIAssistant from './components/AIAssistant';
 import './App.css';
 import './AIAssistant.css';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import analytics from './utils/analytics';
 
 function App() {
   // Simplified: No prefix for easier development and CORS handling
@@ -28,6 +31,8 @@ function App() {
       <Router basename={basename}>
         <div className="App">
           <Header />
+          {/* Track page views on route change */}
+          <RouteChangeTracker />
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -54,3 +59,11 @@ function App() {
 }
 
 export default App;
+
+function RouteChangeTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    analytics.pageview(location.pathname + location.search);
+  }, [location]);
+  return null;
+}

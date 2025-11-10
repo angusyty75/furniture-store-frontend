@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import apiClient from '../config/api';
 import { getFullImageUrl } from '../utils/imageUtils';
 import useSEO from '../hooks/useSEO';
+import { trackAddToCart } from '../utils/analytics';
 import StructuredData, { createProductSchema } from '../components/StructuredData';
 
 const ProductDetail = () => {
@@ -151,6 +152,24 @@ const ProductDetail = () => {
       
       if (response.data.success) {
         alert(t('addedToCart'));
+        try {
+          const priceNum = Number(product.price) || 0;
+          const itemName = product.name || product.nameEn || product.nameZh || product.id;
+          const value = priceNum * Number(quantity || 1);
+          const items = [
+            {
+              id: product.id,
+              name: itemName,
+              price: priceNum,
+              quantity: Number(quantity || 1),
+            },
+          ];
+
+          trackAddToCart({ currency: product.currency || 'HKD', value, items });
+        } catch (e) {
+          // don't block user flow if analytics fails
+          console.warn('trackAddToCart failed', e);
+        }
       } else {
         alert('Failed to add to cart');
       }
