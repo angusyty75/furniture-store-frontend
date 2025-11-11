@@ -235,7 +235,7 @@ const hmrPort = null;
 const socketHost = `${null || importMetaUrl.hostname}:${hmrPort || importMetaUrl.port}${"/"}`;
 const directSocketHost = "localhost:5173/";
 const base = "/" || '/';
-const wsToken = "OOBu1yI3jsRz";
+const wsToken = "GEyq9Yhfhc92";
 const messageBuffer = [];
 let socket;
 try {

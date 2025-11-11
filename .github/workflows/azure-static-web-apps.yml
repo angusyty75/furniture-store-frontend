@@ -27,6 +27,16 @@ jobs:
       - name: Build production (Vite)
         run: npm run build
 
+      - name: Verify GA ID present in build
+        run: |
+          echo "Checking dist for GA measurement ID..."
+          if grep -R -l "G-CZF5PXBTS0" dist >/dev/null 2>&1; then
+            echo "GA_ID_FOUND=true"
+            grep -R -l "G-CZF5PXBTS0" dist || true
+          else
+            echo "GA_ID_FOUND=false"
+          fi
+
       - name: Upload artifact (optional)
         uses: actions/upload-artifact@v4
         with:

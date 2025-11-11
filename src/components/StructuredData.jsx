@@ -54,7 +54,7 @@ export const createProductSchema = (product) => ({
   "offers": {
     "@type": "Offer",
     "price": product.price,
-    "priceCurrency": "USD",
+    "priceCurrency": "HKD",
     "availability": "https://schema.org/InStock"
   },
   "brand": {

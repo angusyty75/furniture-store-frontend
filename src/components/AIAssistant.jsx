@@ -229,7 +229,7 @@ const AIAssistant = ({ language = 'en' }) => {
   const formatPrice = (price) => {
     return new Intl.NumberFormat(currentLanguage === 'zh' ? 'zh-CN' : 'en-US', {
       style: 'currency',
-      currency: 'USD' // Always use USD for consistency with your backend
+      currency: 'HKD' // Always use HKD for consistency with your backend
     }).format(price);
   };
 

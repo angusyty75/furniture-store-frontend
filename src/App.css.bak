@@ -1064,7 +1064,8 @@ button.view-product-btn {
 /* Product Detail */
 .product-detail {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* Reserve 700px for images column on desktop, info column takes remaining space */
+  grid-template-columns: 700px 1fr;
   gap: 3rem;
   margin-top: 2rem;
 }
@@ -1075,40 +1076,47 @@ button.view-product-btn {
   gap: 1rem;
 }
 
-/* Main image container: fixed frame 700x400 by default but responsive */
+/* Main image container: fixed frame on desktop, responsive on smaller screens.
+   Use object-fit: contain so the image is fully visible and not cropped. */
 .main-image {
-  width: 700px;
+  /* Fill the left grid column; limit to 700px so thumbnails align */
+  width: 100%;
+  max-width: 700px;
   height: 400px;
-  max-width: 100%; /* allows it to shrink on narrow viewports */
   overflow: hidden;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
+  display: block;
 }
 
 .main-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ensure whole image is visible and centered */
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
   display: block;
-}
-
-/* On small screens, allow the main image to shrink and use viewport height for better fit */
-@media (max-width: 760px) {
-  .main-image {
-    width: calc(100% - 32px);
-    height: min(60vh, 400px);
-  }
 }
 
 .image-thumbnails {
   display: flex;
   gap: 0.5rem;
-  max-width: 700px; /* thumbnails row capped at 800px */
+  max-width: 700px; /* thumbnails row capped at 700px */
   overflow-x: auto;
   flex-wrap: nowrap;
+}
+
+/* Option D: responsive height cap for main image on narrow screens */
+@media (max-width: 768px) {
+  .main-image {
+    width: calc(100% - 32px);
+    max-width: 100%;
+    height: min(60vh, 400px);
+  }
+
+  .main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 .image-thumbnails img {
@@ -2335,5 +2343,48 @@ button.view-product-btn {
 @media (min-width: 992px) {
   .product-image {
     height: 140px !important;
+  }
+}
+
+/* Enforce 700px image column on wide screens (Option D fallback)
+   Use a min-width breakpoint to avoid forcing layout on small desktops. */
+@media (min-width: 1000px) {
+  /* At slightly smaller wide screens allow the 700px image column to apply */
+  .product-detail {
+    grid-template-columns: 700px 1fr !important;
+    /* Ensure container can expand to allow the left column to reach 700px */
+    min-width: 700px;
+  }
+
+  .main-image {
+    /* Allow the main-image to occupy the full 700px without being capped by ancestor rules */
+    min-width: 700px !important;
+    max-width: 700px !important;
+  }
+}
+
+/* Force the image element to fill the 700x400 frame on wide screens.
+   Use !important to ensure this wins against other rules that may set height.
+   On smaller screens we keep the responsive sizing. */
+@media (min-width: 1000px) {
+  .main-image img {
+    width: 700px !important;
+    height: 400px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  /* Ensure the thumbnails row aligns */
+  .image-thumbnails {
+    max-width: 700px !important;
+  }
+}
+
+@media (max-width: 1099px) {
+  .main-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
   }
 }

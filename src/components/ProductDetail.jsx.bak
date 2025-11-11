@@ -1,0 +1,268 @@
+// frontend/src/components/ProductDetail.jsx
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import apiClient from '../config/api';
+import { getFullImageUrl } from '../utils/imageUtils';
+import useSEO from '../hooks/useSEO';
+import { trackAddToCart } from '../utils/analytics';
+import StructuredData, { createProductSchema } from '../components/StructuredData';
+
+const ProductDetail = () => {
+  const { id, slug } = useParams();
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [product, setProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        // Use slug if available, otherwise use id
+        const productIdentifier = slug || id;
+        
+        // Check if the parameter is a number (ID) or string (slug)
+        const isNumericId = /^\d+$/.test(productIdentifier);
+        const endpoint = isNumericId ? `/products/${productIdentifier}` : `/products/slug/${productIdentifier}`;
+        
+        console.log('Fetching product with:', { productIdentifier, isNumericId, endpoint });
+        
+        const response = await apiClient.get(`${endpoint}?lang=${i18n.language}`);
+        setProduct(response.data);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+        setProduct(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id, slug, i18n.language]);
+
+  // Dynamic SEO based on product data
+  useSEO({
+    title: product ? `${product.name} - Furniture Store` : "Loading Product...",
+    description: product 
+      ? `${product.name} - ${product.description || 'Premium furniture product'}. Price: $${product.price}. ${product.category || 'Quality furniture'} available now!`
+      : "Loading product details from our premium furniture collection.",
+    keywords: product 
+      ? `${product.name}, ${product.category || 'furniture'}, office furniture, home furniture, ${product.price}, premium furniture`
+      : "furniture, product details, premium furniture"
+  });
+
+  const handleBack = () => {
+    // Try to get the referrer information from location state
+    const referrer = location.state?.from;
+    
+    console.log('🔄 Back button clicked');
+    console.log('🔄 Location state:', location.state);
+    console.log('🔄 Referrer data:', referrer);
+    
+    // If we have referrer information with preserved state, use it
+    if (referrer) {
+      console.log('🔄 Using referrer data for navigation');
+      console.log('🔄 Scroll position to restore:', referrer.scrollPosition);
+      console.log('🔄 Restoring to URL:', referrer.pathname + referrer.search);
+      
+      navigate(referrer.pathname + referrer.search, { 
+        state: { 
+          ...referrer.state,
+          restoreScrollPosition: referrer.scrollPosition 
+        },
+        replace: false 
+      });
+      return;
+    }
+    
+    // Check for stored scroll position as fallback
+    const storedPosition = sessionStorage.getItem('previousScrollPosition');
+    if (storedPosition) {
+      try {
+        const { pathname, search, scrollPosition } = JSON.parse(storedPosition);
+        navigate(pathname + search);
+        
+        // Restore scroll position
+        setTimeout(() => {
+          window.scrollTo(scrollPosition.x, scrollPosition.y);
+        }, 50);
+        
+        // Clean up stored position
+        sessionStorage.removeItem('previousScrollPosition');
+        return;
+      } catch (e) {
+        console.warn('Failed to parse stored scroll position:', e);
+      }
+    }
+    
+    // Check browser history and document referrer
+    const documentReferrer = document.referrer;
+    const currentOrigin = window.location.origin;
+    
+    // If referrer is from same origin, try to extract path
+    if (documentReferrer && documentReferrer.startsWith(currentOrigin)) {
+      const referrerPath = documentReferrer.replace(currentOrigin, '');
+      if (referrerPath && referrerPath !== window.location.pathname) {
+        navigate(referrerPath);
+        return;
+      }
+    }
+    
+    // Check if we have browser history to go back to
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      // Ultimate fallback: navigate to products list
+      navigate('/products');
+    }
+  };
+
+  const addToCart = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert(t('loginRequired'));
+      return;
+    }
+    
+    try {
+      console.log('Adding to cart:', { productId: product.id, quantity });
+      console.log('Token:', token.substring(0, 20) + '...');
+      
+      // Create form data to match backend @FormParam expectations
+      const cartData = new URLSearchParams();
+      cartData.append('productId', product.id.toString());
+      cartData.append('quantity', quantity.toString());
+
+      console.log('Cart data:', cartData.toString());
+
+      // Use exact same format as working test
+      const response = await apiClient({
+        method: 'POST',
+        url: '/cart/items',
+        data: cartData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      });
+      
+      console.log('Cart response:', response.data);
+      
+      if (response.data.success) {
+        alert(t('addedToCart'));
+        try {
+          const priceNum = Number(product.price) || 0;
+          const itemName = product.name || product.nameEn || product.nameZh || product.id;
+          const value = priceNum * Number(quantity || 1);
+          const items = [
+            {
+              id: product.id,
+              name: itemName,
+              price: priceNum,
+              quantity: Number(quantity || 1),
+            },
+          ];
+
+          trackAddToCart({ currency: product.currency || 'HKD', value, items });
+        } catch (e) {
+          // don't block user flow if analytics fails
+          console.warn('trackAddToCart failed', e);
+        }
+      } else {
+        alert('Failed to add to cart');
+      }
+    } catch (error) {
+      console.error('Cart error details:', error.response?.data || error.message);
+      console.error('Error status:', error.response?.status);
+      
+      if (error.response?.status === 401) {
+        alert(t('loginRequired'));
+      } else if (error.response?.data?.error) {
+        alert(`Failed to add to cart: ${error.response.data.error}`);
+      } else {
+        alert('Failed to add to cart');
+      }
+    }
+  };
+
+  if (loading) return <div>{t('loading')}</div>;
+  if (!product) return <div>{t('productNotFound')}</div>;
+
+  return (
+    <div className="product-detail">
+      <div className="product-images">
+        <div className="main-image">
+          <img 
+            src={getFullImageUrl(
+              product.images && 
+              product.images.length > 0 && 
+              product.images[selectedImage] && 
+              product.images[selectedImage].imageUrl 
+                ? product.images[selectedImage].imageUrl 
+                : 'images/placeholder.jpg'
+            )} 
+            alt={
+              product.images && 
+              product.images.length > 0 && 
+              product.images[selectedImage] 
+                ? (product.images[selectedImage].altText || product.name)
+                : product.name
+            }
+            onError={(e) => {
+              console.log('Product image failed to load:', e.target.src);
+              e.target.src = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80";
+            }}
+          />
+        </div>
+        <div className="image-thumbnails">
+          {product.images && product.images.map((image, index) => (
+            <img
+              key={image.id}
+              src={getFullImageUrl(image.imageUrl)}
+              alt={image.altText}
+              className={index === selectedImage ? 'active' : ''}
+              onClick={() => setSelectedImage(index)}
+            />
+          ))}
+        </div>
+      </div>
+      
+      <div className="product-info">
+        <h1>{i18n.language === 'zh' ? product.nameZh : product.nameEn}</h1>
+        <div className="price">${product.price}</div>
+        {product.comparePrice && (
+          <div className="compare-price">${product.comparePrice}</div>
+        )}
+        
+        <div className="description">
+          <h3>{t('description')}</h3>
+          <p>{i18n.language === 'zh' ? (product.desc_zh || product.descriptionZh || product.description) : (product.desc_en || product.descriptionEn || product.description)}</p>
+        </div>
+        
+        <div className="add-to-cart">
+          <div className="quantity-selector">
+            <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+            <span>{quantity}</span>
+            <button onClick={() => setQuantity(quantity + 1)}>+</button>
+          </div>
+          <div className="cart-actions">
+            <button className="back-btn" onClick={handleBack}>
+              {t('back')}
+            </button>
+            <button className="add-cart-btn" onClick={addToCart}>
+              {t('addToCart')}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Structured Data for Product */}
+      {product && <StructuredData data={createProductSchema(product)} />}
+    </div>
+    </>
+  );
+};
+
+export default ProductDetail;
