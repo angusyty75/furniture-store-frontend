@@ -1,0 +1,7 @@
+{
+  "name": "furniture-store-api",
+  "version": "1.0.0",
+  "description": "Azure Functions for runtime configuration endpoints",
+  "license": "MIT",
+  "dependencies": {}
+}

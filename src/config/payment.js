@@ -1,14 +1,56 @@
 // Payment configuration and test credit card constants
 import { loadStripe } from '@stripe/stripe-js';
 
-// Test Stripe Publishable Key (replace with your actual key)
-const STRIPE_PUBLISHABLE_KEY = '';
+const RUNTIME_CONFIG_ENDPOINT = '/api/runtime-config';
 
-// Initialize Stripe
+const getEnvStripeKey = () => (import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '').trim();
+
 let stripePromise;
-export const getStripe = () => {
+let stripeKeyPromise;
+
+const fetchRuntimeStripeKey = async () => {
+  if (typeof window === 'undefined') return '';
+
+  try {
+    const response = await fetch(RUNTIME_CONFIG_ENDPOINT, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`Unexpected runtime config response: ${response.status}`);
+    }
+    const data = await response.json();
+    return (data?.stripePublishableKey || '').trim();
+  } catch (err) {
+    if (import.meta.env.DEV) {
+      console.warn('[payment] Failed to load runtime Stripe config', err);
+    }
+    return '';
+  }
+};
+
+const resolveStripePublishableKey = async () => {
+  if (!stripeKeyPromise) {
+    stripeKeyPromise = (async () => {
+      const envKey = getEnvStripeKey();
+      if (envKey) {
+        return envKey;
+      }
+      return await fetchRuntimeStripeKey();
+    })();
+  }
+
+  return stripeKeyPromise;
+};
+
+// Initialize Stripe lazily so we can fetch the runtime key when needed.
+export const getStripe = async () => {
   if (!stripePromise) {
-    stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
+    const publishableKey = await resolveStripePublishableKey();
+    if (!publishableKey) {
+      if (import.meta.env.DEV) {
+        console.error('[payment] Stripe publishable key is not configured.');
+      }
+      return null;
+    }
+    stripePromise = loadStripe(publishableKey);
   }
   return stripePromise;
 };
