@@ -5,29 +5,20 @@ const PRODUCTION_API_BASE_URL = 'https://furniture-store-backend-34618.azurewebs
 
 // Environment-based API base URL configuration
 const getApiBaseUrl = () => {
+  const isProdBuild = import.meta.env.MODE === 'production';
+  if (isProdBuild) {
+    return PRODUCTION_API_BASE_URL;
+  }
+
   // Prefer explicit env vars set at build time
     // Check environment variable first (set by build scripts)
     // Only honor VITE_BACKEND_URL for production builds. In development
     // we prefer port-based autodetection so local dev servers (5173 -> 8081)
     const envBackend = import.meta.env.VITE_BACKEND_URL;
-    const isProdBuild = import.meta.env.MODE === 'production';
     if (envBackend) {
-      if (isProdBuild) {
-        if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(?:\/|$)/i.test(envBackend)) {
-          return PRODUCTION_API_BASE_URL;
-        }
-        console.log('🔧 Using environment-specified backend (production):', envBackend);
-        return envBackend;
-      } else {
-        // In development, ignore the env override to avoid surprising mappings
-        console.log('⚠️ VITE_BACKEND_URL is set but ignored in development. Detected:', envBackend);
-      }
+      // In development, ignore the env override to avoid surprising mappings
+      console.log('⚠️ VITE_BACKEND_URL is set but ignored in development. Detected:', envBackend);
     }
-  // (envBackend handled above for production. In dev we fall through to port-based mapping.)
-
-  if (isProdBuild) {
-    return PRODUCTION_API_BASE_URL;
-  }
 
   // Check if we're running on Azure Static Web Apps (production)
   if (window.location.hostname.includes('azurestaticapps.net')) {
