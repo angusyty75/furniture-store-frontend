@@ -1,6 +1,8 @@
 // src/config/api.js
 import axios from 'axios';
 
+const PRODUCTION_API_BASE_URL = 'https://furniture-store-backend-34618.azurewebsites.net/api';
+
 // Environment-based API base URL configuration
 const getApiBaseUrl = () => {
   // Prefer explicit env vars set at build time
@@ -11,6 +13,9 @@ const getApiBaseUrl = () => {
     const isProdBuild = import.meta.env.MODE === 'production';
     if (envBackend) {
       if (isProdBuild) {
+        if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(?:\/|$)/i.test(envBackend)) {
+          return PRODUCTION_API_BASE_URL;
+        }
         console.log('🔧 Using environment-specified backend (production):', envBackend);
         return envBackend;
       } else {
@@ -19,6 +24,10 @@ const getApiBaseUrl = () => {
       }
     }
   // (envBackend handled above for production. In dev we fall through to port-based mapping.)
+
+  if (isProdBuild) {
+    return PRODUCTION_API_BASE_URL;
+  }
 
   // Check if we're running on Azure Static Web Apps (production)
   if (window.location.hostname.includes('azurestaticapps.net')) {
